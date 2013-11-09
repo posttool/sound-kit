@@ -39,11 +39,11 @@
     if ( self = [super init] ) {
         [self createAUGraph];
         [self startGraph];
-//        NSURL *bankURL = [[NSURL alloc] initFileURLWithPath:[[NSBundle mainBundle] pathForResource:@"HS Synthetic Electronic" ofType:@"sf2"]];
+        NSURL *bankURL = [[NSURL alloc] initFileURLWithPath:[[NSBundle mainBundle] pathForResource:@"HS Synthetic Electronic" ofType:@"sf2"]];
 //        NSURL *bankURL = [[NSURL alloc] initFileURLWithPath:[[NSBundle mainBundle] pathForResource:@"Vintage Dreams Waves v2" ofType:@"sf2"]];
 //        NSURL *bankURL = [[NSURL alloc] initFileURLWithPath:[[NSBundle mainBundle] pathForResource:@"hs-pad-texts" ofType:@"sf2"]];
 //        NSURL *bankURL = [[NSURL alloc] initFileURLWithPath:[[NSBundle mainBundle] pathForResource:@"tr808" ofType:@"SF2"]];
-        NSURL *bankURL = [[NSURL alloc] initFileURLWithPath:[[NSBundle mainBundle] pathForResource:@"Gorts_Filters" ofType:@"SF2"]];
+//        NSURL *bankURL = [[NSURL alloc] initFileURLWithPath:[[NSBundle mainBundle] pathForResource:@"Gorts_Filters" ofType:@"SF2"]];
 //        NSURL *bankURL = [[NSURL alloc] initFileURLWithPath:[[NSBundle mainBundle] pathForResource:@"Guitar18Mando16_ejl" ofType:@"sf2"]];
         OSStatus result = noErr;
         // fill out a bank preset data structure

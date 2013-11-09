@@ -25,17 +25,11 @@ NSMutableArray *scale;
     if (self = [super initWithSize:size]) {
 //        position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
         
-        scale = [NSMutableArray arrayWithObjects:
-                 [NSNumber numberWithInt:2],
-                 [NSNumber numberWithInt:2],
-                 [NSNumber numberWithInt:3],
-                 [NSNumber numberWithInt:2],
-                 [NSNumber numberWithInt:3],nil];
         
-//        scale = [NSMutableArray arrayWithObjects:
-//                 [NSNumber numberWithInt:5],
-//                 [NSNumber numberWithInt:4],
-//                 [NSNumber numberWithInt:3],nil];
+        scale = [NSMutableArray arrayWithObjects:
+                 [NSNumber numberWithInt:5],
+                 [NSNumber numberWithInt:4],
+                 [NSNumber numberWithInt:3],nil];
         
 //        scale = [NSMutableArray arrayWithObjects:
 //                 [NSNumber numberWithInt:4],
@@ -55,12 +49,34 @@ NSMutableArray *scale;
                 for (NSUInteger col = 0; col < colCount; ++col) {
                     int f = row * colCount + col;
                     float p = (float)f / (float)(rowCount*colCount);
-                    SK1 *sk = [[SK1 alloc] initWithAlpha:p AndPitch:pi];
+                    SK1 *sk = [[SK1 alloc] initWithAlpha:p AndPitch:pi AndSize:40 AndStroke:4];
                     sk.position = pos;
                     [self addChild:sk];
                     pos.x += cellSize.width + gridSpace.width;
                     pi += [[scale objectAtIndex:(f % scale.count)] intValue];
                 }
+        }
+        scale = [NSMutableArray arrayWithObjects:
+                 [NSNumber numberWithInt:2],
+                 [NSNumber numberWithInt:2],
+                 [NSNumber numberWithInt:3],
+                 [NSNumber numberWithInt:2],
+                 [NSNumber numberWithInt:3],nil];
+        
+        //pi = 44+36;
+        pi += 12;
+        baseOrigin = CGPointMake(180, 50);
+        for (NSUInteger row = 0; row < rowCount; ++row) {
+            CGPoint pos = CGPointMake(baseOrigin.x, row * (gridSpace.height + cellSize.height) + baseOrigin.y);
+            for (NSUInteger col = 0; col < colCount; ++col) {
+                int f = row * colCount + col;
+                float p = (float)f / (float)(rowCount*colCount);
+                SK1 *sk = [[SK1 alloc] initWithAlpha:p AndPitch:pi AndSize:15 AndStroke:4];
+                sk.position = pos;
+                [self addChild:sk];
+                pos.x += cellSize.width + gridSpace.width;
+                pi += [[scale objectAtIndex:(f % scale.count)] intValue];
+            }
         }
         
         
@@ -73,20 +89,22 @@ NSMutableArray *scale;
         [world addChild:camera];
         
         self.physicsBody = [SKPhysicsBody bodyWithEdgeLoopFromRect:self.frame];
-        self.physicsWorld.speed = .88;
+        
+        
+        self.physicsWorld.speed = 1.1;
         self.physicsWorld.gravity = CGVectorMake(0, 0);
         self.physicsWorld.contactDelegate = self;
         
-        self.motionManager = [[CMMotionManager alloc] init];
-        self.motionManager.accelerometerUpdateInterval = .2;
-        [self.motionManager startAccelerometerUpdatesToQueue:[NSOperationQueue currentQueue]
-                                                 withHandler:^(CMAccelerometerData  *data, NSError *error) {
-                                                     self.physicsWorld.gravity = CGVectorMake(data.acceleration.x, data.acceleration.y);
-                                                     if(error)
-                                                     {
-                                                         NSLog(@"%@", error);
-                                                     }
-                                                 }];
+//        self.motionManager = [[CMMotionManager alloc] init];
+//        self.motionManager.accelerometerUpdateInterval = .2;
+//        [self.motionManager startAccelerometerUpdatesToQueue:[NSOperationQueue currentQueue]
+//                                                 withHandler:^(CMAccelerometerData  *data, NSError *error) {
+//                                                     self.physicsWorld.gravity = CGVectorMake(data.acceleration.x, data.acceleration.y);
+//                                                     if(error)
+//                                                     {
+//                                                         NSLog(@"%@", error);
+//                                                     }
+//                                                 }];
         
         sound = [[SKEngine alloc] init];
         
@@ -123,8 +141,8 @@ NSMutableArray *scale;
     SK1 *a = (SK1*) contact.bodyA.node;
     BOOL anode = [a isKindOfClass:[SK1 class]];
 //    [a play:sound ]
-    SKShapeNode *b = (SKShapeNode*) contact.bodyB.node;
-    BOOL bnode = [b isKindOfClass:[SKShapeNode class]];
+    SK1 *b = (SK1*) contact.bodyB.node;
+    BOOL bnode = [b isKindOfClass:[SK1 class]];
 //    if (anode && bnode && ![joints containsObject:a] && ![joints containsObject:b])
 //    {
 //        SKPhysicsJointSpring* spring = [SKPhysicsJointSpring jointWithBodyA:a.physicsBody bodyB:b.physicsBody anchorA:b.position anchorB:a.position];
@@ -134,23 +152,10 @@ NSMutableArray *scale;
 //    }
     if (anode && bnode)
     {
-//        a.fillColor = [self color2];
-//        b.fillColor = [self color2];
-        a.glowWidth = 13;
-        b.glowWidth = 13;
-        NSNumber *pitcha = a.userData[@"pitch"];
-        [sound playNoteOn:pitcha.intValue :64];//contact.collisionImpulse*100];
-        NSNumber *pitchb = b.userData[@"pitch"];
-        [sound playNoteOn:pitchb.intValue :64];//contact.collisionImpulse*100];
-        double delayInSeconds = .2;//MAX(.3, contact.collisionImpulse);
-        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-            [sound playNoteOff:pitcha.intValue];
-            [sound playNoteOff:pitchb.intValue];
-            a.glowWidth = 1;
-            b.glowWidth = 1;
-        });
+        [a contact:sound];
+        [b contact:sound];
     }
+    //do they love each other
     
 }
 
