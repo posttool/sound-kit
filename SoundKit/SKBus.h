@@ -16,6 +16,7 @@
 @property (readonly) AudioUnit samplerUnit;
 @property (readonly) NSURL * bankURL;
 - (id) init:(NSURL*)bankURL;
+- (id) init:(NSString*)bankURL :(NSString*)type;
 - (void) wire:(AUGraph)processingGraph :(AUNode)mixer :(int)samplerOutputElement :(int)mixerInputElement;
 - (void)noteOn:(UInt32)noteNum :(UInt32)velocity;
 - (void)noteOff:(UInt32)noteNum;

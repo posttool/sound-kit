@@ -34,8 +34,17 @@ SKBus *t;
     //    '-()--------()-'
     
     
-    NSURL *b0 = [[NSURL alloc] initFileURLWithPath:[[NSBundle mainBundle] pathForResource:@"HS Synthetic Electronic" ofType:@"sf2"]];
-    t = [[SKBus alloc] init:b0];
+//    t = [[SKBus alloc] init:@"HS Synthetic Electronic" :@"sf2"];
+//    t = [[SKBus alloc] init:@"JK_Pads" :@"SF2"];
+//    t = [[SKBus alloc] init:@"Johansson_BeautifulPad" :@"sf2"];
+//    t = [[SKBus alloc] init:@"jonnypad6" :@"SF2"];
+//    t = [[SKBus alloc] init:@"jonnypad8" :@"SF2"];
+//    t = [[SKBus alloc] init:@"rtanpad1" :@"SF2"];
+    t = [[SKBus alloc] init:@"Vintage Dreams Waves v2" :@"sf2"];
+//    t = [[SKBus alloc] init:@"hs-pad-texts" :@"sf2"];
+//    t = [[SKBus alloc] init:@"tr808" :@"SF2"];
+//    t = [[SKBus alloc] init:@"Gorts_Filters" :@"SF2"];
+//    t = [[SKBus alloc] init:@"HS Synthetic Electronic" :@"sf2"];
     [t wire:processingGraph :mixerNode :0 :0];
     
     NSLog (@"Audio processing graph state immediately before initializing it:");
@@ -44,7 +53,6 @@ SKBus *t;
     [self startAUGraph];
     return self;
 }
-
 
 
 #pragma mark -

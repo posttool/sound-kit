@@ -25,6 +25,19 @@
     return self;
 }
 
+
+
+- (id) init:(NSString*)path :(NSString*)type;
+{
+    if ( self = [super init] )
+    {
+        _bankURL = [[NSURL alloc] initFileURLWithPath:[[NSBundle mainBundle] pathForResource:path ofType:type]];;
+    }
+    
+    return self;
+}
+
+
 - (void) wire:(AUGraph)processingGraph :(AUNode)mixer :(int)samplerOutputElement :(int)mixerInputElement
 {
     OSStatus result = noErr;
