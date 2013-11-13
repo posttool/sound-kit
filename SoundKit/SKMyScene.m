@@ -7,7 +7,7 @@
 //
 
 #import "SKMyScene.h"
-#import "SKEngine.h"
+#import "SKAudio.h"
 #import "SK1.h"
 
 @implementation SKMyScene
@@ -16,14 +16,23 @@ CGPoint anchorPoint;
 SKNode *world;
 SKNode *camera;
 
-SKEngine *sound;
+SKAudio *sound;
 NSMutableArray *joints;
 NSMutableArray *scale;
 
 
 -(id)initWithSize:(CGSize)size {    
     if (self = [super initWithSize:size]) {
-//        position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
+        
+        
+        sound = [[SKAudio alloc] init];
+        
+        joints = [[NSMutableArray alloc] init];
+
+        
+        
+        
+        
         
         
         scale = [NSMutableArray arrayWithObjects:
@@ -49,7 +58,7 @@ NSMutableArray *scale;
                 for (NSUInteger col = 0; col < colCount; ++col) {
                     int f = row * colCount + col;
                     float p = (float)f / (float)(rowCount*colCount);
-                    SK1 *sk = [[SK1 alloc] initWithAlpha:p AndPitch:pi AndSize:40 AndStroke:4];
+                    SK1 *sk = [[SK1 alloc] initWithAlpha:p AndPitch:pi AndSize:40 AndStroke:4 AndBus:sound.bus];
                     sk.position = pos;
                     [self addChild:sk];
                     pos.x += cellSize.width + gridSpace.width;
@@ -71,7 +80,7 @@ NSMutableArray *scale;
             for (NSUInteger col = 0; col < colCount; ++col) {
                 int f = row * colCount + col;
                 float p = (float)f / (float)(rowCount*colCount);
-                SK1 *sk = [[SK1 alloc] initWithAlpha:p AndPitch:pi AndSize:15 AndStroke:4];
+                SK1 *sk = [[SK1 alloc] initWithAlpha:p AndPitch:pi AndSize:15 AndStroke:4 AndBus:sound.bus];
                 sk.position = pos;
                 [self addChild:sk];
                 pos.x += cellSize.width + gridSpace.width;
@@ -106,9 +115,6 @@ NSMutableArray *scale;
 //                                                     }
 //                                                 }];
         
-        sound = [[SKEngine alloc] init];
-        
-        joints = [[NSMutableArray alloc] init];
         
         
     }
@@ -130,33 +136,31 @@ NSMutableArray *scale;
     node.parent.position = CGPointMake(node.parent.position.x - cameraPositionInScene.x, node.parent.position.y - cameraPositionInScene.y);
 }
 
-- (void) setColor: (SKColor *)color
-{
-    
-}
 
 // stufu
 - (void)didBeginContact:(SKPhysicsContact *)contact
 {
     SK1 *a = (SK1*) contact.bodyA.node;
     BOOL anode = [a isKindOfClass:[SK1 class]];
-//    [a play:sound ]
+
     SK1 *b = (SK1*) contact.bodyB.node;
     BOOL bnode = [b isKindOfClass:[SK1 class]];
-//    if (anode && bnode && ![joints containsObject:a] && ![joints containsObject:b])
-//    {
-//        SKPhysicsJointSpring* spring = [SKPhysicsJointSpring jointWithBodyA:a.physicsBody bodyB:b.physicsBody anchorA:b.position anchorB:a.position];
-//        [self.physicsWorld addJoint:spring];
-//        [joints addObject:a];
-//        [joints addObject:b];
-//    }
+    
     if (anode && bnode)
     {
-        [a contact:sound];
-        [b contact:sound];
+        [a contact];
+        [b contact];
     }
     //do they love each other
-    
+
+    //    if (anode && bnode && ![joints containsObject:a] && ![joints containsObject:b])
+    //    {
+    //        SKPhysicsJointSpring* spring = [SKPhysicsJointSpring jointWithBodyA:a.physicsBody bodyB:b.physicsBody anchorA:b.position anchorB:a.position];
+    //        [self.physicsWorld addJoint:spring];
+    //        [joints addObject:a];
+    //        [joints addObject:b];
+    //    }
+
 }
 
 - (void)didEndContact:(SKPhysicsContact *)contact

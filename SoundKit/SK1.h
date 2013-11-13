@@ -7,13 +7,14 @@
 //
 
 #import <SpriteKit/SpriteKit.h>
-#import "SKEngine.h"
+#import "SKBus.h"
 
 @interface SK1 : SKShapeNode
 @property float alpha;
 @property int pitch;
 @property int size;
 @property bool playing;
-- (id) initWithAlpha:(float)alpha AndPitch:(int)pitch AndSize:(int)size AndStroke:(int)stroke;
--(void) contact:(SKEngine*)sound;
+@property (strong, atomic) SKBus * bus;
+- (id) initWithAlpha:(float)alpha AndPitch:(int)pitch AndSize:(int)size AndStroke:(int)stroke AndBus:(SKBus*)bus;
+-(void) contact;
 @end

@@ -16,6 +16,9 @@
 		F918F534182AAE0500A2BFA4 /* HS Synthetic Electronic.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = F918F533182AAE0500A2BFA4 /* HS Synthetic Electronic.sf2 */; };
 		F93F987C1829AB7D0017D91F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F93F987B1829AB7D0017D91F /* Main.storyboard */; };
 		F999C1C0182C6B8900B428A4 /* SK1.m in Sources */ = {isa = PBXBuildFile; fileRef = F999C1BF182C6B8900B428A4 /* SK1.m */; };
+		F999C1C31833E59100B428A4 /* SKBus.m in Sources */ = {isa = PBXBuildFile; fileRef = F999C1C21833E59100B428A4 /* SKBus.m */; };
+		F9A54A601833EA1100444855 /* SKAudio.m in Sources */ = {isa = PBXBuildFile; fileRef = F9A54A5F1833EA1100444855 /* SKAudio.m */; };
+		F9A54A631834008100444855 /* SKAudioError.m in Sources */ = {isa = PBXBuildFile; fileRef = F9A54A621834008100444855 /* SKAudioError.m */; };
 		F9AD30891828494C0029A51C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9AD30881828494C0029A51C /* Foundation.framework */; };
 		F9AD308B1828494C0029A51C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9AD308A1828494C0029A51C /* CoreGraphics.framework */; };
 		F9AD308D1828494C0029A51C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9AD308C1828494C0029A51C /* UIKit.framework */; };
@@ -60,6 +63,12 @@
 		F93F987B1829AB7D0017D91F /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		F999C1BE182C6B8900B428A4 /* SK1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SK1.h; sourceTree = "<group>"; };
 		F999C1BF182C6B8900B428A4 /* SK1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SK1.m; sourceTree = "<group>"; };
+		F999C1C11833E59100B428A4 /* SKBus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKBus.h; sourceTree = "<group>"; };
+		F999C1C21833E59100B428A4 /* SKBus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKBus.m; sourceTree = "<group>"; };
+		F9A54A5E1833EA1100444855 /* SKAudio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKAudio.h; sourceTree = "<group>"; };
+		F9A54A5F1833EA1100444855 /* SKAudio.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKAudio.m; sourceTree = "<group>"; };
+		F9A54A611834008100444855 /* SKAudioError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKAudioError.h; sourceTree = "<group>"; };
+		F9A54A621834008100444855 /* SKAudioError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKAudioError.m; sourceTree = "<group>"; };
 		F9AD30851828494C0029A51C /* SoundKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SoundKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9AD30881828494C0029A51C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		F9AD308A1828494C0029A51C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -218,6 +227,8 @@
 		F9C2FCDB182A8FA00056D6E2 /* Audio */ = {
 			isa = PBXGroup;
 			children = (
+				F9A54A5E1833EA1100444855 /* SKAudio.h */,
+				F9A54A5F1833EA1100444855 /* SKAudio.m */,
 				F918F533182AAE0500A2BFA4 /* HS Synthetic Electronic.sf2 */,
 				F918F531182AADFC00A2BFA4 /* Vintage Dreams Waves v2.sf2 */,
 				F918F52F182AAD1600A2BFA4 /* tr808.SF2 */,
@@ -227,6 +238,10 @@
 				F918F524182A9B9300A2BFA4 /* Gorts_Filters.SF2 */,
 				F9C2FCDC182A8FD00056D6E2 /* SKEngine.h */,
 				F9C2FCDD182A8FD00056D6E2 /* SKEngine.m */,
+				F999C1C11833E59100B428A4 /* SKBus.h */,
+				F999C1C21833E59100B428A4 /* SKBus.m */,
+				F9A54A611834008100444855 /* SKAudioError.h */,
+				F9A54A621834008100444855 /* SKAudioError.m */,
 			);
 			name = Audio;
 			sourceTree = "<group>";
@@ -338,9 +353,12 @@
 			files = (
 				F9AD30A41828494C0029A51C /* SKMyScene.m in Sources */,
 				F9AD309B1828494C0029A51C /* SKAppDelegate.m in Sources */,
+				F999C1C31833E59100B428A4 /* SKBus.m in Sources */,
 				F9C2FCDE182A8FD00056D6E2 /* SKEngine.m in Sources */,
 				F999C1C0182C6B8900B428A4 /* SK1.m in Sources */,
 				F9AD30A11828494C0029A51C /* SKViewController.m in Sources */,
+				F9A54A601833EA1100444855 /* SKAudio.m in Sources */,
+				F9A54A631834008100444855 /* SKAudioError.m in Sources */,
 				F9AD30971828494C0029A51C /* main.m in Sources */,
 				F9C2FCDA1829C7FC0056D6E2 /* AudioTest.xm in Sources */,
 			);
