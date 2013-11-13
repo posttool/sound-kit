@@ -62,6 +62,8 @@
 {
     if (self.playing)
         return;
+//    if (arc4random()%10==1)
+//        self.pitch += (arc4random()%10)-5;
     self.playing = YES;
     self.glowWidth = 13;
     [_bus noteOn:self.pitch :64];//contact.collisionImpulse*100];

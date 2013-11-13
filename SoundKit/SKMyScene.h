@@ -11,5 +11,5 @@
 
 @interface SKMyScene : SKScene<SKPhysicsContactDelegate, UIAccelerometerDelegate>
 @property (strong) CMMotionManager* motionManager;
-
+-(void)scale:(float)scale;
 @end

@@ -10,7 +10,7 @@
     AudioUnit                       mixerUnit;
     AUNode                          mixerNode;
     AUNode                          iONode;
-
+    NSMutableArray                * buses;
 }
 
 @property (readwrite)           AudioStreamBasicDescription stereoStreamFormat;
@@ -32,10 +32,7 @@
 
 - (void) printErrorMessage: (NSString *) errorString withStatus: (OSStatus) result;
 
-- (void)playNoteOn:(UInt32)noteNum :(UInt32)velocity;
-- (void)playNoteOff:(UInt32)noteNum;
-
-- (SKBus*)bus;
+- (SKBus*)busAt:(uint)i;
 
 @end
 

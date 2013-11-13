@@ -13,7 +13,8 @@
 @synthesize playing;                    // Boolean flag to indicate whether audio is playing or not
 @synthesize interruptedDuringPlayback;  // Boolean flag to indicate whether audio was playing when an interruption arrived
 
-SKBus *t;
+;
+
 
 - (id) init {
 
@@ -40,13 +41,27 @@ SKBus *t;
 //    t = [[SKBus alloc] init:@"jonnypad6" :@"SF2"];
 //    t = [[SKBus alloc] init:@"jonnypad8" :@"SF2"];
 //    t = [[SKBus alloc] init:@"rtanpad1" :@"SF2"];
-    t = [[SKBus alloc] init:@"Vintage Dreams Waves v2" :@"sf2"];
+//    t = [[SKBus alloc] init:@"Vintage Dreams Waves v2" :@"sf2"];
 //    t = [[SKBus alloc] init:@"hs-pad-texts" :@"sf2"];
 //    t = [[SKBus alloc] init:@"tr808" :@"SF2"];
 //    t = [[SKBus alloc] init:@"Gorts_Filters" :@"SF2"];
 //    t = [[SKBus alloc] init:@"HS Synthetic Electronic" :@"sf2"];
-    [t wire:processingGraph :mixerNode :0 :0];
+//    t = [[SKBus alloc] init:@"synth" :@"sf2"];
+//    t = [[SKBus alloc] init:@"mood" :@"sf2"];
     
+    buses = [[NSMutableArray alloc] init];
+    
+    SKBus *t = [[SKBus alloc] init:@"Dark Basses" :@"sf2"];
+    [t wire:processingGraph :mixerNode :0];
+    [self setMixerInput:0 gain:.7];
+    [buses addObject:t];
+
+    t = [[SKBus alloc] init:@"2rock9" :@"sf2"];
+    [t wire:processingGraph :mixerNode :1];
+    [self setMixerInput:1 gain:.5];
+    [buses addObject:t];
+
+
     NSLog (@"Audio processing graph state immediately before initializing it:");
     CAShow (processingGraph);
     
@@ -54,19 +69,15 @@ SKBus *t;
     return self;
 }
 
+-(SKBus*) busAt:(uint)i
+{
+    return [buses objectAtIndex:i];
+}
+
 
 #pragma mark -
 #pragma mark Audio processing graph setup
 
-// This method performs all the work needed to set up the audio processing graph:
-
-    // 1. Instantiate and open an audio processing graph
-    // 2. Obtain the audio unit nodes for the graph
-    // 3. Configure the Multichannel Mixer unit
-    //     * specify the number of input buses
-    //     * specify the output sample rate
-    //     * specify the maximum frames-per-slice
-    // 4. Initialize the audio processing graph
 
 - (void) configureAndInitializeAudioProcessingGraph {
 
@@ -81,8 +92,6 @@ SKBus *t;
     
     
 //............................................................................
-// Specify the audio unit component descriptions for the audio units to be
-//    added to the graph.
 
     // I/O unit
     AudioComponentDescription iOUnitDescription;
@@ -100,9 +109,6 @@ SKBus *t;
     MixerUnitDescription.componentFlags         = 0;
     MixerUnitDescription.componentFlagsMask     = 0;
 
-
-//............................................................................
-// Add nodes to the audio processing graph.
     NSLog (@"Adding nodes to audio processing graph");
 
     
@@ -127,9 +133,6 @@ SKBus *t;
 //............................................................................
 // Open the audio processing graph
 
-    // Following this call, the audio units are instantiated but not initialized
-    //    (no resource allocation occurs and the audio units are not in a state to
-    //    process audio).
     result = AUGraphOpen (processingGraph);
     
     if (noErr != result) {[self printErrorMessage: @"AUGraphOpen" withStatus: result]; return;}
@@ -216,10 +219,6 @@ SKBus *t;
     if (noErr != result) {[self printErrorMessage: @"AUGraphInitialize" withStatus: result]; return;}
     
     
-    
- 
-
-    
 }
 
 
@@ -280,18 +279,7 @@ SKBus *t;
 // Set the mixer unit input volume for a specified bus
 - (void) setMixerInput: (UInt32) inputBus gain: (AudioUnitParameterValue) newGain {
 
-/*
-    This method does *not* ensure that sound loops stay in sync if the user has 
-    moved the volume of an input channel to zero. When a channel's input 
-    level goes to zero, the corresponding input render callback is no longer 
-    invoked. Consequently, the sample number for that channel remains constant 
-    while the sample number for the other channel continues to increment. As a  
-    workaround, the view controller Nib file specifies that the minimum input
-    level is 0.01, not zero.
-    
-    The enableMixerInput:isOn: method in this class, however, does ensure that the 
-    loops stay in sync when a user disables and then reenables an input bus.
-*/
+
     OSStatus result = AudioUnitSetParameter (
                          mixerUnit,
                          kMultiChannelMixerParam_Volume,
@@ -323,20 +311,6 @@ SKBus *t;
 }
 
 
-///dork
-- (void)playNoteOn:(UInt32)noteNum :(UInt32)velocity
-{
-    [t noteOn:noteNum :velocity];
-}
-
-- (void)playNoteOff:(UInt32)noteNum
-{
-    [t noteOff:noteNum];
-}
--(SKBus*)bus
-{
-    return t;
-}
 
 
 

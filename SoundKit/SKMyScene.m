@@ -24,69 +24,35 @@ NSMutableArray *scale;
 -(id)initWithSize:(CGSize)size {    
     if (self = [super initWithSize:size]) {
         
+        self.physicsBody = [SKPhysicsBody bodyWithEdgeLoopFromRect:self.frame];
+        
+        
+        self.physicsWorld.speed = 1.1;
+        self.physicsWorld.gravity = CGVectorMake(0, 0);
+        self.physicsWorld.contactDelegate = self;
         
         sound = [[SKAudio alloc] init];
         
         joints = [[NSMutableArray alloc] init];
 
         
-        
-        
-        
-        
-        
-        scale = [NSMutableArray arrayWithObjects:
-                 [NSNumber numberWithInt:5],
-                 [NSNumber numberWithInt:4],
-                 [NSNumber numberWithInt:3],nil];
-        
-//        scale = [NSMutableArray arrayWithObjects:
-//                 [NSNumber numberWithInt:4],
-//                 [NSNumber numberWithInt:3],
-//                 [NSNumber numberWithInt:5],nil];
-
-        
-        CGSize cellSize = CGSizeMake(60, 60);
-        CGSize gridSpace = CGSizeMake(33, 33);
-        NSUInteger rowCount = 3;
-        NSUInteger colCount = 3;
-        
-        int pi = 44;
-        CGPoint baseOrigin = CGPointMake(50, 150);
-        for (NSUInteger row = 0; row < rowCount; ++row) {
-                CGPoint pos = CGPointMake(baseOrigin.x, row * (gridSpace.height + cellSize.height) + baseOrigin.y);
-                for (NSUInteger col = 0; col < colCount; ++col) {
-                    int f = row * colCount + col;
-                    float p = (float)f / (float)(rowCount*colCount);
-                    SK1 *sk = [[SK1 alloc] initWithAlpha:p AndPitch:pi AndSize:40 AndStroke:4 AndBus:sound.bus];
-                    sk.position = pos;
-                    [self addChild:sk];
-                    pos.x += cellSize.width + gridSpace.width;
-                    pi += [[scale objectAtIndex:(f % scale.count)] intValue];
-                }
-        }
         scale = [NSMutableArray arrayWithObjects:
                  [NSNumber numberWithInt:2],
                  [NSNumber numberWithInt:2],
                  [NSNumber numberWithInt:3],
                  [NSNumber numberWithInt:2],
                  [NSNumber numberWithInt:3],nil];
-        
-        //pi = 44+36;
-        pi += 12;
-        baseOrigin = CGPointMake(180, 50);
-        for (NSUInteger row = 0; row < rowCount; ++row) {
-            CGPoint pos = CGPointMake(baseOrigin.x, row * (gridSpace.height + cellSize.height) + baseOrigin.y);
-            for (NSUInteger col = 0; col < colCount; ++col) {
-                int f = row * colCount + col;
-                float p = (float)f / (float)(rowCount*colCount);
-                SK1 *sk = [[SK1 alloc] initWithAlpha:p AndPitch:pi AndSize:15 AndStroke:4 AndBus:sound.bus];
-                sk.position = pos;
-                [self addChild:sk];
-                pos.x += cellSize.width + gridSpace.width;
-                pi += [[scale objectAtIndex:(f % scale.count)] intValue];
-            }
+
+        int pi = 32;
+        for (NSUInteger i = 0; i < 11; ++i) {
+            float p = (pi-32) / 70.0;
+            pi += [[scale objectAtIndex:(i % scale.count)] intValue];
+            SK1 *sk = [[SK1 alloc] initWithAlpha:p AndPitch:pi AndSize:p*20 AndStroke:4 AndBus:[sound busAt:i%2]];
+            sk.position = CGPointMake(arc4random() % (int)size.width, arc4random() % (int)size.height);
+            [self addChild:sk];
         }
+        
+        
         
         
         //
@@ -97,12 +63,6 @@ NSMutableArray *scale;
         camera.name = @"camera";
         [world addChild:camera];
         
-        self.physicsBody = [SKPhysicsBody bodyWithEdgeLoopFromRect:self.frame];
-        
-        
-        self.physicsWorld.speed = 1.1;
-        self.physicsWorld.gravity = CGVectorMake(0, 0);
-        self.physicsWorld.contactDelegate = self;
         
 //        self.motionManager = [[CMMotionManager alloc] init];
 //        self.motionManager.accelerometerUpdateInterval = .2;
@@ -120,7 +80,11 @@ NSMutableArray *scale;
     }
     return self;
 }
-
+-(void)scale:(float)scale
+{
+    NSLog(@"%f",scale);
+    self.physicsWorld.speed = scale;
+}
 
 
 
@@ -165,32 +129,15 @@ NSMutableArray *scale;
 
 - (void)didEndContact:(SKPhysicsContact *)contact
 {
-//    SKShapeNode *a = (SKShapeNode*) contact.bodyA.node;
-//    NSNumber *alpha = a.userData[@"alpha"];
-//    if ([a isKindOfClass:[SKShapeNode class]])
-//    {
-//        a.fillColor = [self color1:alpha.floatValue];
-//        a.glowWidth = 1;
-//    }
-//    SKShapeNode *b = (SKShapeNode*) contact.bodyB.node;
-//    alpha = b.userData[@"alpha"];
-//    if ([b isKindOfClass:[SKShapeNode class]])
-//    {
-//        b.fillColor = [self color1:alpha.floatValue];
-//        b.glowWidth = 1;
-//    }
-//    
-//    NSNumber *pitch = a.userData[@"pitch"];
-//    [sound playNoteOff:pitch.intValue];
-//    pitch = b.userData[@"pitch"];
-//    [sound playNoteOff:pitch.intValue];
 }
 
 //
 
 
 // touching
-
+//speed
+//size
+//scale
 
 CGPoint touchLocation;
 SKSpriteNode *touchedNode;
@@ -216,13 +163,10 @@ SKSpriteNode *touchedNode;
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     for (UITouch *touch in touches) {
         CGPoint location = [touch locationInNode:self];
-        CGVector vec = CGVectorMake((location.x - touchLocation.x) * 33, (location.y - touchLocation.y) * 33);
+        CGVector vec = CGVectorMake((location.x - touchLocation.x) * 11, (location.y - touchLocation.y) * 11);
         [touchedNode.physicsBody applyForce:vec];
     }
-}
-
-
-- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
+    [self scale:1];
 }
 
 
