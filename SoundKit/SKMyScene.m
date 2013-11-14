@@ -27,10 +27,6 @@ NSMutableArray *scale;
         self.physicsBody = [SKPhysicsBody bodyWithEdgeLoopFromRect:self.frame];
         
         
-        self.physicsWorld.speed = 1.1;
-        self.physicsWorld.gravity = CGVectorMake(0, 0);
-        self.physicsWorld.contactDelegate = self;
-        
         sound = [[SKAudio alloc] init];
         
         joints = [[NSMutableArray alloc] init];
@@ -47,12 +43,15 @@ NSMutableArray *scale;
         for (NSUInteger i = 0; i < 11; ++i) {
             float p = (pi-32) / 70.0;
             pi += [[scale objectAtIndex:(i % scale.count)] intValue];
-            SK1 *sk = [[SK1 alloc] initWithAlpha:p AndPitch:pi AndSize:p*20 AndStroke:4 AndBus:[sound busAt:i%2]];
+            SK1 *sk = [[SK1 alloc] initWithAlpha:p AndPitch:pi AndSize:(p+.15)*14 AndStroke:4 AndBus:[sound busAt:i%2]];
             sk.position = CGPointMake(arc4random() % (int)size.width, arc4random() % (int)size.height);
             [self addChild:sk];
         }
         
         
+        self.physicsWorld.speed = 1.1;
+        self.physicsWorld.gravity = CGVectorMake(0, 0);
+        self.physicsWorld.contactDelegate = self;
         
         
         //
