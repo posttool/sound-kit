@@ -79,10 +79,10 @@ NSMutableArray *scale;
     }
     return self;
 }
--(void)scale:(float)scale
+-(void)setTimeScale:(float)scale
 {
     NSLog(@"%f",scale);
-    self.physicsWorld.speed = scale;
+    self.physicsWorld.speed = scale - .5;
 }
 
 
@@ -141,37 +141,54 @@ NSMutableArray *scale;
 CGPoint touchLocation;
 SKSpriteNode *touchedNode;
 
--(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
     UITouch *touch = [touches anyObject];
     touchLocation = [touch locationInNode:self];
     touchedNode = (SKSpriteNode *)[self nodeAtPoint:touchLocation];
-    touchedNode.physicsBody.velocity = CGVectorMake(0,0);
+    BOOL anode = [touchedNode isKindOfClass:[SK1 class]];
+    if (anode)
+        touchedNode.physicsBody.velocity = CGVectorMake(0,0);
 }
 
-- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-    for (UITouch *touch in touches) {
-        CGPoint location = [touch locationInNode:self];
-//        CGVector vec = CGVectorMake((location.x - touchLocation.x) * 3, (location.y - touchLocation.y) * 3);
-//        [touchedNode.physicsBody applyForce:vec];
-//        touchLocation = location;
-        touchedNode.position = location;
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    BOOL anode = [touchedNode isKindOfClass:[SK1 class]];
+    if (anode)
+    {
+        for (UITouch *touch in touches)
+        {
+            CGPoint location = [touch locationInNode:self];
+            touchedNode.position = location;
+            break;
+        }
+    }
+    else
+    {
+        
     }
 }
-
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    for (UITouch *touch in touches) {
-        CGPoint location = [touch locationInNode:self];
-        CGVector vec = CGVectorMake((location.x - touchLocation.x) * 11, (location.y - touchLocation.y) * 11);
-        [touchedNode.physicsBody applyForce:vec];
+    BOOL anode = [touchedNode isKindOfClass:[SK1 class]];
+    if (anode)
+    {
+        for (UITouch *touch in touches)
+        {
+            CGPoint location = [touch locationInNode:self];
+            CGVector vec = CGVectorMake((location.x - touchLocation.x) * 11, (location.y - touchLocation.y) * 11);
+            [touchedNode.physicsBody applyForce:vec];
+            break;
+        }
+        [self setTimeScale:1];
     }
-    [self scale:1];
 }
 
 
 
 
--(void)update:(CFTimeInterval)currentTime {
+-(void)update:(CFTimeInterval)currentTime
+{
     /* Called before each frame is rendered */
 }
 

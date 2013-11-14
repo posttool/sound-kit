@@ -62,7 +62,7 @@ SKMyScene * scene;
     // Get the location of the gesture
     CGPoint location = [recognizer locationInView:self.view];
     
-    [scene scale:[recognizer scale]];
+    [scene setTimeScale:[recognizer scale]];
 }
 
 

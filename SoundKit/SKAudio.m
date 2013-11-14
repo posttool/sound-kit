@@ -1,14 +1,14 @@
 
 
 #import "SKAudio.h"
-
+#import "SKAudioError.h"
+#import "SKNU.h"
 
 #pragma mark -
 @implementation SKAudio
 
-@synthesize mixerUnit;                  // the Multichannel Mixer unit
-@synthesize mixerNode;      // node for Multichannel Mixer unit
-@synthesize iONode;         // node for I/O unit
+@synthesize mixer;
+@synthesize io;
 
 @synthesize playing;                    // Boolean flag to indicate whether audio is playing or not
 @synthesize interruptedDuringPlayback;  // Boolean flag to indicate whether audio was playing when an interruption arrived
@@ -52,17 +52,17 @@
     buses = [[NSMutableArray alloc] init];
     
     SKBus *t = [[SKBus alloc] init:@"Dark Basses" :@"sf2"];
-    [t wire:processingGraph :mixerNode :0];
-    [self setMixerInput:0 gain:.7];
+    [t wire:processingGraph :mixer.node :0];
+    [self setMixerInput:0 gain:.9];
     [buses addObject:t];
 
     t = [[SKBus alloc] init:@"2rock9" :@"sf2"];
-    [t wire:processingGraph :mixerNode :1];
-    [self setMixerInput:1 gain:.5];
+    [t wire:processingGraph :mixer.node :1];
+    [self setMixerInput:1 gain:.7];
     [buses addObject:t];
 
 
-    NSLog (@"Audio processing graph state immediately before initializing it:");
+    NSLog (@"Audio processing graph state immediately before starting it:");
     CAShow (processingGraph);
     
     [self startAUGraph];
@@ -86,87 +86,44 @@
 
 //............................................................................
 // Create a new audio processing graph.
-    result = NewAUGraph (&processingGraph);
-
-    if (noErr != result) {[self printErrorMessage: @"NewAUGraph" withStatus: result]; return;}
     
+    result = NewAUGraph (&processingGraph);
+    [SKAudioError check:result :"new graph"];
+   
     
 //............................................................................
-
-    // I/O unit
-    AudioComponentDescription iOUnitDescription;
-    iOUnitDescription.componentType          = kAudioUnitType_Output;
-    iOUnitDescription.componentSubType       = kAudioUnitSubType_RemoteIO;
-    iOUnitDescription.componentManufacturer  = kAudioUnitManufacturer_Apple;
-    iOUnitDescription.componentFlags         = 0;
-    iOUnitDescription.componentFlagsMask     = 0;
+// io and mixer node units
     
-    // Multichannel mixer unit
-    AudioComponentDescription MixerUnitDescription;
-    MixerUnitDescription.componentType          = kAudioUnitType_Mixer;
-    MixerUnitDescription.componentSubType       = kAudioUnitSubType_MultiChannelMixer;
-    MixerUnitDescription.componentManufacturer  = kAudioUnitManufacturer_Apple;
-    MixerUnitDescription.componentFlags         = 0;
-    MixerUnitDescription.componentFlagsMask     = 0;
-
-    NSLog (@"Adding nodes to audio processing graph");
-
+    io = [[SKNU alloc] init:kAudioUnitType_Output :kAudioUnitSubType_RemoteIO];
+    [io node:processingGraph];
     
-    // Add the nodes to the audio processing graph
-    result =    AUGraphAddNode (
-                    processingGraph,
-                    &iOUnitDescription,
-                    &iONode);
-    
-    if (noErr != result) {[self printErrorMessage: @"AUGraphNewNode failed for I/O unit" withStatus: result]; return;}
-    
+    mixer = [[SKNU alloc] init:kAudioUnitType_Mixer :kAudioUnitSubType_MultiChannelMixer];
+    [mixer node:processingGraph];
 
-    result =    AUGraphAddNode (
-                    processingGraph,
-                    &MixerUnitDescription,
-                    &mixerNode
-                );
-
-    if (noErr != result) {[self printErrorMessage: @"AUGraphNewNode failed for Mixer unit" withStatus: result]; return;}
-    
 
 //............................................................................
 // Open the audio processing graph
-
     result = AUGraphOpen (processingGraph);
-    
-    if (noErr != result) {[self printErrorMessage: @"AUGraphOpen" withStatus: result]; return;}
-    
-    
-//............................................................................
-// Obtain the mixer unit instance from its corresponding node.
+    [SKAudioError check:result :"open graph"];
 
-    result =    AUGraphNodeInfo (
-                    processingGraph,
-                    mixerNode,
-                    NULL,
-                    &mixerUnit
-                );
+    [mixer unit:processingGraph];
     
-    if (noErr != result) {[self printErrorMessage: @"AUGraphNodeInfo" withStatus: result]; return;}
-    
-
 //............................................................................
 // Multichannel Mixer unit Setup
 
     UInt32 busCount   = 2;    // bus count for mixer unit input
     
-    NSLog (@"Setting mixer unit input bus count to: %u", busCount);
+    NSLog (@"Setting mixer unit input bus count to: %u", (unsigned int)busCount);
     result = AudioUnitSetProperty (
-                 mixerUnit,
+                 mixer.unit,
                  kAudioUnitProperty_ElementCount,
                  kAudioUnitScope_Input,
                  0,
                  &busCount,
                  sizeof (busCount)
              );
+    [SKAudioError check:result :"set mixer bus count"];
 
-    if (noErr != result) {[self printErrorMessage: @"AudioUnitSetProperty (set mixer unit bus count)" withStatus: result]; return;}
 
 
     NSLog (@"Setting kAudioUnitProperty_MaximumFramesPerSlice for mixer unit global scope");
@@ -175,7 +132,7 @@
     UInt32 maximumFramesPerSlice = 4096;
     
     result = AudioUnitSetProperty (
-                 mixerUnit,
+                 mixer.unit,
                  kAudioUnitProperty_MaximumFramesPerSlice,
                  kAudioUnitScope_Global,
                  0,
@@ -185,41 +142,63 @@
 
     if (noErr != result) {[self printErrorMessage: @"AudioUnitSetProperty (set mixer unit input stream format)" withStatus: result]; return;}
 
+    NSLog(@"io.node=%d", (int)io.node);
+    [mixer wire:processingGraph :io.node];
 
+    
 
-//............................................................................
-// Connect the nodes of the audio processing graph
-    NSLog (@"Connecting the mixer output to the input of the I/O unit output element");
-
-    result = AUGraphConnectNodeInput (
-                 processingGraph,
-                 mixerNode,         // source node
-                 0,                 // source node output bus number
-                 iONode,            // destination node
-                 0                  // desintation node input bus number
-             );
-
-    if (noErr != result) {[self printErrorMessage: @"AUGraphConnectNodeInput" withStatus: result]; return;}
+//    if (WRITE_TO_DISK)
+//    {
+//        AURenderCallbackStruct callbackStruct = {0};
+//        callbackStruct.inputProc = WriteToDiskAURenderCallback;
+//        callbackStruct.inputProcRefCon = mixerUnit;
+//        
+//        AudioUnitSetProperty(ioUnit,
+//                             kAudioUnitProperty_SetRenderCallback,
+//                             kAudioUnitScope_Input,
+//                             0,
+//                             &callbackStruct,
+//                             sizeof(callbackStruct));
+//    }
     
     
 //............................................................................
 // Initialize audio processing graph
 
-    // Diagnostic code
-    // Call CAShow if you want to look at the state of the audio processing 
-    //    graph.
+    //
     NSLog (@"Audio processing graph state immediately before initializing it:");
     CAShow (processingGraph);
 
     NSLog (@"Initializing the audio processing graph");
-    // Initialize the audio processing graph, configure audio data stream formats for
-    //    each input and output, and validate the connections between audio units.
     result = AUGraphInitialize (processingGraph);
     
     if (noErr != result) {[self printErrorMessage: @"AUGraphInitialize" withStatus: result]; return;}
     
-    
 }
+
+//OSStatus WriteToDiskAURenderCallback(void *inRefCon,
+//                            AudioUnitRenderActionFlags *actionFlags,
+//                            const AudioTimeStamp *inTimeStamp,
+//                            UInt32 inBusNumber,
+//                            UInt32 inNumberFrames,
+//                            AudioBufferList *ioData) {
+//    
+//    AudioUnit mixerUnit = (AudioUnit)inRefCon;
+//    
+//    AudioUnitRender(mixerUnit,
+//                    actionFlags,
+//                    inTimeStamp,
+//                    0,
+//                    inNumberFrames,
+//                    ioData);
+//    
+//    ExtAudioFileWriteAsync(outputFile,
+//                           inNumberFrames,
+//                           ioData);
+//    
+//    return noErr;
+//}
+//
 
 
 #pragma mark -
@@ -230,7 +209,7 @@
 
     NSLog (@"Starting audio processing graph");
     OSStatus result = AUGraphStart (processingGraph);
-    if (noErr != result) {[self printErrorMessage: @"AUGraphStart" withStatus: result]; return;}
+    [SKAudioError check:result :"graph start"];
 
     self.playing = YES;
     
@@ -262,7 +241,7 @@
     NSLog (@"Bus %d now %@", (int) inputBus, isOnValue ? @"on" : @"off");
          
     OSStatus result = AudioUnitSetParameter (
-                         mixerUnit,
+                         mixer.unit,
                          kMultiChannelMixerParam_Enable,
                          kAudioUnitScope_Input,
                          inputBus,
@@ -281,7 +260,7 @@
 
 
     OSStatus result = AudioUnitSetParameter (
-                         mixerUnit,
+                         mixer.unit,
                          kMultiChannelMixerParam_Volume,
                          kAudioUnitScope_Input,
                          inputBus,
@@ -298,7 +277,7 @@
 - (void) setMixerOutputGain: (AudioUnitParameterValue) newGain {
 
     OSStatus result = AudioUnitSetParameter (
-                         mixerUnit,
+                         mixer.unit,
                          kMultiChannelMixerParam_Volume,
                          kAudioUnitScope_Output,
                          0,

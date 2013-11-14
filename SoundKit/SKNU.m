@@ -14,11 +14,15 @@
 #import <CoreAudio/CoreAudioTypes.h>
 
 @implementation SKNU
+@synthesize type = _type;
+@synthesize subtype = _subtype;
 @synthesize node = _node;
+@synthesize nodeInitialized = _nodeInitialized;
 @synthesize unit = _unit;
-int _type;
-int _subtype;
-AudioComponentDescription cd = {};
+@synthesize unitInitialized = _unitInitialized;
+@synthesize target = _target;
+@synthesize targetInitialized = _targetInitialized;
+
 
 -(id) init:(int)type :(int)subtype
 {
@@ -26,8 +30,50 @@ AudioComponentDescription cd = {};
         return nil;
     _type = type;
     _subtype = subtype;
+    _nodeInitialized = NO;
+    _unitInitialized = NO;
+    _targetInitialized = NO;
     return self;
 }
+
+- (void) node:(AUGraph)processingGraph
+{
+    if (_nodeInitialized)
+        return;
+    
+    AudioComponentDescription cd = {};
+    cd.componentType = _type;
+    cd.componentSubType = _subtype;
+    cd.componentManufacturer = kAudioUnitManufacturer_Apple;
+    cd.componentFlags         = 0;
+    cd.componentFlagsMask     = 0;
+    
+    OSStatus result = AUGraphAddNode(processingGraph, &cd, &_node);
+    [SKAudioError check:result :"add node"];
+    _nodeInitialized = YES;
+    NSLog(@"added node");
+}
+
+- (void) unit:(AUGraph)processingGraph
+{
+    if (_unitInitialized)
+        return;
+    if (!_nodeInitialized)
+        return;
+    OSStatus result = AUGraphNodeInfo(processingGraph, self.node, NULL, &_unit);
+    [SKAudioError check:result :"set node info"];
+    _unitInitialized = YES;
+    NSLog(@"added unit");
+}
+
+
+- (void) addTo:(AUGraph)processingGraph
+{
+    [self node:processingGraph];
+    [self unit:processingGraph];
+    
+}
+
 
 - (void) wire:(AUGraph)processingGraph :(AUNode)target
 {
@@ -36,23 +82,18 @@ AudioComponentDescription cd = {};
 
 - (void) wire:(AUGraph)processingGraph :(AUNode)target :(int)targetInput
 {
-
-    AudioComponentDescription cd = {};
-    cd.componentType = _type;
-    cd.componentSubType = _subtype;
-    cd.componentManufacturer = kAudioUnitManufacturer_Apple;
-    OSStatus result = AUGraphAddNode(processingGraph, &cd, &_node);
-    [SKAudioError check:result :"add sampler node"];
-
-    AUGraphNodeInfo(processingGraph, self.node, NULL, &_unit);
-    [SKAudioError check:result :"add sampler unit"];
-
-    result = AUGraphConnectNodeInput(processingGraph,
-                                     self.node, 0,
-                                     target, targetInput);
-    [SKAudioError check:result :"connect sampler to mixer"];
-
+    NSLog(@"NU wrire %hhd %hhd", _unitInitialized, _targetInitialized);
+    if (!_unitInitialized)
+        return;
+    if (_targetInitialized)
+        return;
     
+    NSLog(@"wiring");
+    OSStatus result = AUGraphConnectNodeInput(processingGraph, self.node, 0, target, targetInput);
+    [SKAudioError check:result :"connect node input"];
+//    _target = target;
+    _targetInitialized = YES;
+    NSLog(@"wired to target");
 }
 
 -(void)loadSF:(NSURL*)bankURL

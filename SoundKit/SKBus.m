@@ -31,9 +31,7 @@
 {
     if ( self = [super init] )
     {
-        NSLog(@"LOADING %@ %@", path, type);
         NSString*s = [[NSBundle mainBundle] pathForResource:path ofType:type];
-        NSLog(@"found %@", s);
         _bankURL = [[NSURL alloc] initFileURLWithPath:s];;
     }
     
@@ -43,9 +41,11 @@
 - (void) wire:(AUGraph)processingGraph :(AUNode)mixer :(int)mixerInput
 {
     _effect = [[SKNU alloc] init:kAudioUnitType_Effect :kAudioUnitSubType_Delay];
+    [_effect addTo:processingGraph];
     [_effect wire:processingGraph :mixer :mixerInput];
     
     _sampler = [[SKNU alloc] init:kAudioUnitType_MusicDevice :kAudioUnitSubType_Sampler];
+    [_sampler addTo:processingGraph];
     [_sampler wire:processingGraph :_effect.node];
     [_sampler loadSF:_bankURL];
     

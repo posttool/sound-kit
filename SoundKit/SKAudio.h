@@ -2,25 +2,20 @@
 #import "SKBus.h"
 
 @interface SKAudio : NSObject <AVAudioSessionDelegate> {
-
-
-    AUGraph                         processingGraph;
-    BOOL                            playing;
-    BOOL                            interruptedDuringPlayback;
-    AudioUnit                       mixerUnit;
-    AUNode                          mixerNode;
-    AUNode                          iONode;
-    NSMutableArray                * buses;
+    AUGraph processingGraph;
+    BOOL playing;
+    BOOL interruptedDuringPlayback;
+    SKNU * mixerUnit;
+    SKNU * ioUnit;
+    NSMutableArray * buses;
 }
 
-@property (readwrite)           AudioStreamBasicDescription stereoStreamFormat;
-@property (readwrite)           AudioStreamBasicDescription monoStreamFormat;
-@property (readwrite)           Float64                     graphSampleRate;
-@property (getter = isPlaying)  BOOL                        playing;
-@property                       BOOL                        interruptedDuringPlayback;
-@property                       AudioUnit                   mixerUnit;
-@property                       AUNode                      mixerNode;
-@property                       AUNode                      iONode;
+@property (readwrite) AudioStreamBasicDescription stereoStreamFormat;
+@property (readwrite) AudioStreamBasicDescription monoStreamFormat;
+@property (getter = isPlaying) BOOL playing;
+@property BOOL interruptedDuringPlayback;
+@property (readonly) SKNU * mixer;
+@property (readonly) SKNU * io;
 
 - (void) configureAndInitializeAudioProcessingGraph;
 - (void) startAUGraph;
