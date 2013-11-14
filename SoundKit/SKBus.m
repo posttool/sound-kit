@@ -26,7 +26,6 @@
 }
 
 
-
 - (id) init:(NSString*)path :(NSString*)type
 {
     if ( self = [super init] )
@@ -41,18 +40,15 @@
 - (void) wire:(AUGraph)processingGraph :(AUNode)mixer :(int)mixerInput
 {
     _effect = [[SKNU alloc] init:kAudioUnitType_Effect :kAudioUnitSubType_Delay];
-    [_effect addTo:processingGraph];
+    [_effect nu:processingGraph];
     [_effect wire:processingGraph :mixer :mixerInput];
     
     _sampler = [[SKNU alloc] init:kAudioUnitType_MusicDevice :kAudioUnitSubType_Sampler];
-    [_sampler addTo:processingGraph];
+    [_sampler nu:processingGraph];
     [_sampler wire:processingGraph :_effect.node];
     [_sampler loadSF:_bankURL];
     
 }
-
-
-
 
 
 - (void)noteOn:(UInt32)noteNum :(UInt32)velocity

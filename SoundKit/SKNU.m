@@ -66,14 +66,11 @@
     NSLog(@"added unit");
 }
 
-
-- (void) addTo:(AUGraph)processingGraph
+- (void) nu:(AUGraph)processingGraph
 {
     [self node:processingGraph];
     [self unit:processingGraph];
-    
 }
-
 
 - (void) wire:(AUGraph)processingGraph :(AUNode)target
 {
@@ -82,18 +79,30 @@
 
 - (void) wire:(AUGraph)processingGraph :(AUNode)target :(int)targetInput
 {
-    NSLog(@"NU wrire %hhd %hhd", _unitInitialized, _targetInitialized);
     if (!_unitInitialized)
         return;
     if (_targetInitialized)
         return;
     
-    NSLog(@"wiring");
     OSStatus result = AUGraphConnectNodeInput(processingGraph, self.node, 0, target, targetInput);
     [SKAudioError check:result :"connect node input"];
 //    _target = target;
     _targetInitialized = YES;
     NSLog(@"wired to target");
+}
+
+- (void) setIntProp:(int)a :(int)b :(UInt32)c;
+{
+    OSStatus result = AudioUnitSetProperty(
+                                  _unit,
+                                  a,
+                                  b,
+                                  0,
+                                  &c,
+                                  sizeof (c)
+                                  );
+    [SKAudioError check:result :"set property"];
+
 }
 
 -(void)loadSF:(NSURL*)bankURL

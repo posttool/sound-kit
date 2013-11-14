@@ -23,7 +23,8 @@
 - (void) loadSF:(NSURL*)bankURL;
 - (void) node:(AUGraph)processingGraph ;
 - (void) unit:(AUGraph)processingGraph ;
-- (void) addTo:(AUGraph)processingGraph ;
+- (void) nu:(AUGraph)processingGraph ;
 - (void) wire:(AUGraph)processingGraph :(AUNode)target ;
 - (void) wire:(AUGraph)processingGraph :(AUNode)target :(int)targetInput;
+- (void) setIntProp:(int)a :(int)b :(UInt32)c;
 @end
