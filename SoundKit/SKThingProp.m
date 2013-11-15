@@ -22,9 +22,9 @@
     {
         _pitch = [dict[@"pitch"] intValue];
         _color = [[SKColor alloc] initWithRed:[dict[@"color"][0] floatValue]
-                                        green:[dict[@"color"][0] floatValue]
-                                         blue:[dict[@"color"][0] floatValue]
-                                        alpha:[dict[@"color"][0] floatValue]];
+                                        green:[dict[@"color"][1] floatValue]
+                                         blue:[dict[@"color"][2] floatValue]
+                                        alpha:[dict[@"color"][3] floatValue]];
         _size = [dict[@"size"] floatValue];
         _name = dict[@"name"];
     }

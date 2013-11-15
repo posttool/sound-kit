@@ -176,13 +176,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		F93F98C51829ADCE0017D91F /* iPad */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = iPad;
-			sourceTree = "<group>";
-		};
 		F94CF5281836766B001D9C37 /* Scales */ = {
 			isa = PBXGroup;
 			children = (
@@ -267,7 +260,6 @@
 				F9C2FCDB182A8FA00056D6E2 /* Audio */,
 				F9C2FCD81829C7FC0056D6E2 /* AudioTest.xh */,
 				F9C2FCD91829C7FC0056D6E2 /* AudioTest.xm */,
-				F93F98C51829ADCE0017D91F /* iPad */,
 				F9AD30991828494C0029A51C /* SKAppDelegate.h */,
 				F9AD309A1828494C0029A51C /* SKAppDelegate.m */,
 				F9AD309C1828494C0029A51C /* Main.storyboard */,

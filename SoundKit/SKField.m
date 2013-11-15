@@ -38,12 +38,11 @@ NSMutableArray *scale;
         for (NSUInteger i = 0; i < 21; ++i)
         {
             
-            int pitch = [scale pitchAt:i];
+            int pitch = [scale pitchAt:i + 22];
             SKThingProp * prop = [scale propAt:i];
             SKThing *sk = [[SKThing alloc] initWithAlpha:1
                                                 andPitch:pitch
                                                  andSize:prop.size
-                                               andStroke:1
                                                 andColor:prop.color
                                                   andBus:[sound busAt:i%3]];
             

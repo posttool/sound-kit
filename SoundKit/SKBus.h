@@ -21,6 +21,7 @@
 - (id) init:(NSURL*)bankURL;
 - (id) init:(NSString*)bankURL :(NSString*)type;
 - (void) wire:(AUGraph)processingGraph :(AUNode)mixer :(int)mixerInputElement;
+- (void)noteOn:(UInt32)noteNum;
 - (void)noteOn:(UInt32)noteNum :(UInt32)velocity;
 - (void)noteOff:(UInt32)noteNum;
 

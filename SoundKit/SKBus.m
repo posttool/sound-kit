@@ -39,7 +39,7 @@
 
 - (void) wire:(AUGraph)processingGraph :(AUNode)mixer :(int)mixerInput
 {
-    _effect = [[SKNU alloc] init:kAudioUnitType_Effect :kAudioUnitSubType_Delay];
+    _effect = [[SKNU alloc] init:kAudioUnitType_Effect :kAudioUnitSubType_Reverb2];
     [_effect nu:processingGraph];
     [_effect wire:processingGraph :mixer :mixerInput];
     
@@ -50,6 +50,10 @@
 }
 
 
+- (void)noteOn:(UInt32)noteNum
+{
+    [self noteOn:noteNum :127];
+}
 - (void)noteOn:(UInt32)noteNum :(UInt32)velocity
 {
     UInt32 noteCommand = 0x90 | 0;

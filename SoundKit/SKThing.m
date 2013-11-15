@@ -17,7 +17,7 @@
 @synthesize playing = _playing;
 @synthesize bus = _bus;
 
-- (id) initWithAlpha:(float)alpha andPitch:(int)pitch andSize:(int)size andStroke:(int)stroke andColor:(SKColor*)color andBus:(SKBus*)bus
+- (id) initWithAlpha:(float)alpha andPitch:(int)pitch andSize:(int)size andColor:(SKColor*)color andBus:(SKBus*)bus
 {
     self = [super init];
     
@@ -37,7 +37,7 @@
         self.path = path;
         [self color1];
         self.lineWidth = .1;
-        self.strokeColor = [SKColor whiteColor];
+        self.strokeColor = _color;
         self.glowWidth = 0;
         
 //        self.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:self.size];
@@ -71,18 +71,39 @@
 //    if (arc4random()%10==1)
 //        self.pitch += (arc4random()%10)-5;
     NSLog(@"pitch=%d", self.pitch);
+    double s = 4;
     _playing = YES;
-    self.glowWidth = 13;
-    [_bus noteOn:self.pitch :127];//contact.collisionImpulse*100];
-    double delayInSeconds = self.size/40.0;//MAX(.3, contact.collisionImpulse);
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        [_bus noteOff:self.pitch];
-        self.glowWidth = 0;
-        _playing = NO;
-    });
+    SKAction *a = [SKAction sequence:@[
+      [SKAction runBlock:^(void){ [_bus noteOn:self.pitch :127]; }],
+      [self one:.1], [self two:1.5],
+      [SKAction runBlock:^(void){ [_bus noteOn:self.pitch :48]; }],
+      [self one:.3], [self two:.3],
+      [SKAction runBlock:^(void){ [_bus noteOn:self.pitch :48]; }],
+      [self one:.4], [self two:.4],
+      [SKAction runBlock:^(void){ [_bus noteOff:self.pitch ]; _playing = NO; }],
+    ]];
+
+    
+    [self runAction:a];
 
 }
 
+-(SKAction*) one:(float)time
+{
+    return [SKAction customActionWithDuration:time actionBlock:^(SKNode *node, CGFloat elapsedTime) {
+        float r = elapsedTime/time;
+        self.yScale = self.xScale = r*5+1;
+        self.glowWidth = r*20;
+    }];
+}
+
+-(SKAction*) two:(float)time
+{
+    return [SKAction customActionWithDuration:time actionBlock:^(SKNode *node, CGFloat elapsedTime) {
+        float r = elapsedTime/time;
+        self.yScale = self.xScale = 2-r;
+        self.glowWidth = (1-r)*20;
+    }];
+}
 
 @end

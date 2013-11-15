@@ -18,7 +18,7 @@
 @property (readonly) bool playing;
 @property (readonly) SKBus * bus;
 
-- (id) initWithAlpha:(float)alpha andPitch:(int)pitch andSize:(int)size andStroke:(int)stroke andColor:(SKColor*)color andBus:(SKBus*)bus;
+- (id) initWithAlpha:(float)alpha andPitch:(int)pitch andSize:(int)size andColor:(SKColor*)color andBus:(SKBus*)bus;
 
 - (void) contact;
 
