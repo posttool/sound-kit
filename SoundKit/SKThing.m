@@ -47,7 +47,7 @@
         self.physicsBody.collisionBitMask = 1;
         self.physicsBody.contactTestBitMask = 1;
         self.physicsBody.friction = 0;
-        self.physicsBody.restitution = 1;
+        self.physicsBody.restitution = .9;
         self.physicsBody.linearDamping = 0;
 
     }
@@ -72,36 +72,37 @@
 //        self.pitch += (arc4random()%10)-5;
 //    NSLog(@"pitch=%d", self.pitch);
 
-    SKAction *a = [SKAction sequence:@[
-      [SKAction runBlock:^(void){ [_bus noteOn:self.pitch :127]; }],
-      [self one:.1], [self two:1.5],
-      [SKAction runBlock:^(void){ [_bus noteOn:self.pitch :48]; }],
-      [self one:.3], [self two:.3],
-      [SKAction runBlock:^(void){ [_bus noteOn:self.pitch :48]; }],
-      [self one:.4], [self two:.4],
-      [SKAction runBlock:^(void){ [_bus noteOff:self.pitch ];
-        _playing = NO; }],
-    ]];
+    NSMutableArray * sa = [[NSMutableArray alloc] init];
+    int s = arc4random() % 3 + 3;
+    for (int i=0; i<s; i++)
+    {
+        float p = 3 *i/(float)s+1;//arc4random() % 3 ;
+        float d = p * 0.3 + .3;
+        [sa addObject:[SKAction runBlock:^(void){ [_bus noteOn:self.pitch :(i == 0) ? 127: 33]; }]];
+        [sa addObject:[self one:.1 :(i == 0) ? 20: 6]];
+        [sa addObject:[self two:d-.1 :(i == 0) ? 20: 6]];
+    }
+    [sa addObject:[SKAction runBlock:^(void){ [_bus noteOff:self.pitch ]; _playing = NO; }]];
 
     _playing = YES;
-    [self runAction:a];
+    [self runAction:[SKAction sequence:sa]];
 }
 
--(SKAction*) one:(float)time
+-(SKAction*) one:(float)time :(float)gscale
 {
     return [SKAction customActionWithDuration:time actionBlock:^(SKNode *node, CGFloat elapsedTime) {
         float r = elapsedTime/time;
         self.yScale = self.xScale = r*5+1;
-        self.glowWidth = r*20;
+        self.glowWidth = r*gscale;
     }];
 }
 
--(SKAction*) two:(float)time
+-(SKAction*) two:(float)time :(float)gscale
 {
     return [SKAction customActionWithDuration:time actionBlock:^(SKNode *node, CGFloat elapsedTime) {
         float r = elapsedTime/time;
         self.yScale = self.xScale = 2-r;
-        self.glowWidth = (1-r)*20;
+        self.glowWidth = (1-r)*gscale;
     }];
 }
 
