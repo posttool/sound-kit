@@ -70,9 +70,8 @@
         return;
 //    if (arc4random()%10==1)
 //        self.pitch += (arc4random()%10)-5;
-    NSLog(@"pitch=%d", self.pitch);
-    double s = 4;
-    _playing = YES;
+//    NSLog(@"pitch=%d", self.pitch);
+
     SKAction *a = [SKAction sequence:@[
       [SKAction runBlock:^(void){ [_bus noteOn:self.pitch :127]; }],
       [self one:.1], [self two:1.5],
@@ -80,12 +79,12 @@
       [self one:.3], [self two:.3],
       [SKAction runBlock:^(void){ [_bus noteOn:self.pitch :48]; }],
       [self one:.4], [self two:.4],
-      [SKAction runBlock:^(void){ [_bus noteOff:self.pitch ]; _playing = NO; }],
+      [SKAction runBlock:^(void){ [_bus noteOff:self.pitch ];
+        _playing = NO; }],
     ]];
 
-    
+    _playing = YES;
     [self runAction:a];
-
 }
 
 -(SKAction*) one:(float)time
