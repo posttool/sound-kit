@@ -51,15 +51,9 @@
     
     buses = [[NSMutableArray alloc] init];
     
-    SKBus *t = [[SKBus alloc] init:@"Dark Basses" :@"sf2"];
-    [t wire:processingGraph :mixer.node :0];
-    [self setMixerInput:0 gain:.9];
-    [buses addObject:t];
-
-    t = [[SKBus alloc] init:@"2rock9" :@"sf2"];
-    [t wire:processingGraph :mixer.node :1];
-    [self setMixerInput:1 gain:.7];
-    [buses addObject:t];
+    [self addSF2Bus:@"vibra" :0 :.6];
+    [self addSF2Bus:@"vibra" :1 :.6];
+    [self addSF2Bus:@"vibra" :2 :.6];
 
 
     NSLog (@"Audio processing graph state immediately before starting it:");
@@ -67,6 +61,16 @@
     
     [self startAUGraph];
     return self;
+}
+
+-(SKBus*) addSF2Bus:(NSString*)sf2name :(int)channel :(float)gain
+{
+    SKBus *t;
+    t = [[SKBus alloc] init:sf2name :@"sf2"];
+    [t wire:processingGraph :mixer.node :channel];
+    [self setMixerInput:0 gain:gain];
+    [buses addObject:t];
+    return t;
 }
 
 -(SKBus*) busAt:(uint)i
@@ -134,7 +138,6 @@
     result = AUGraphInitialize (processingGraph);
     [SKAudioError check:result :"AUGraphInitialize"];
     
-    
 }
 
 
@@ -189,8 +192,6 @@
     [SKAudioError check:result :"graph start"];
 
     self.playing = YES;
-    
-
 }
 
 // Stop playback

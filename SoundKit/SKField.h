@@ -9,7 +9,10 @@
 #import <SpriteKit/SpriteKit.h>
 #import <CoreMotion/CMMotionManager.h>
 
-@interface SKMyScene : SKScene<SKPhysicsContactDelegate, UIAccelerometerDelegate>
-@property (strong) CMMotionManager* motionManager;
+@interface SKField : SKScene<SKPhysicsContactDelegate, UIAccelerometerDelegate>
+
+//@property (strong) CMMotionManager* motionManager;
+
 -(void)setTimeScale:(float)scale;
+
 @end

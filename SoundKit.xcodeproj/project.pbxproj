@@ -13,7 +13,7 @@
 		F918F532182AADFC00A2BFA4 /* Vintage Dreams Waves v2.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = F918F531182AADFC00A2BFA4 /* Vintage Dreams Waves v2.sf2 */; };
 		F918F534182AAE0500A2BFA4 /* HS Synthetic Electronic.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = F918F533182AAE0500A2BFA4 /* HS Synthetic Electronic.sf2 */; };
 		F93F987C1829AB7D0017D91F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F93F987B1829AB7D0017D91F /* Main.storyboard */; };
-		F999C1C0182C6B8900B428A4 /* SK1.m in Sources */ = {isa = PBXBuildFile; fileRef = F999C1BF182C6B8900B428A4 /* SK1.m */; };
+		F999C1C0182C6B8900B428A4 /* SKThing.m in Sources */ = {isa = PBXBuildFile; fileRef = F999C1BF182C6B8900B428A4 /* SKThing.m */; };
 		F999C1C31833E59100B428A4 /* SKBus.m in Sources */ = {isa = PBXBuildFile; fileRef = F999C1C21833E59100B428A4 /* SKBus.m */; };
 		F9A54A601833EA1100444855 /* SKAudio.m in Sources */ = {isa = PBXBuildFile; fileRef = F9A54A5F1833EA1100444855 /* SKAudio.m */; };
 		F9A54A631834008100444855 /* SKAudioError.m in Sources */ = {isa = PBXBuildFile; fileRef = F9A54A621834008100444855 /* SKAudioError.m */; };
@@ -47,7 +47,7 @@
 		F9AD30971828494C0029A51C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F9AD30961828494C0029A51C /* main.m */; };
 		F9AD309B1828494C0029A51C /* SKAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F9AD309A1828494C0029A51C /* SKAppDelegate.m */; };
 		F9AD30A11828494C0029A51C /* SKViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9AD30A01828494C0029A51C /* SKViewController.m */; };
-		F9AD30A41828494C0029A51C /* SKMyScene.m in Sources */ = {isa = PBXBuildFile; fileRef = F9AD30A31828494C0029A51C /* SKMyScene.m */; };
+		F9AD30A41828494C0029A51C /* SKField.m in Sources */ = {isa = PBXBuildFile; fileRef = F9AD30A31828494C0029A51C /* SKField.m */; };
 		F9AD30A81828494C0029A51C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9AD30A71828494C0029A51C /* Images.xcassets */; };
 		F9AD30AF1828494C0029A51C /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9AD30AE1828494C0029A51C /* XCTest.framework */; };
 		F9AD30B01828494C0029A51C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9AD30881828494C0029A51C /* Foundation.framework */; };
@@ -78,8 +78,8 @@
 		F918F531182AADFC00A2BFA4 /* Vintage Dreams Waves v2.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Vintage Dreams Waves v2.sf2"; sourceTree = "<group>"; };
 		F918F533182AAE0500A2BFA4 /* HS Synthetic Electronic.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HS Synthetic Electronic.sf2"; sourceTree = "<group>"; };
 		F93F987B1829AB7D0017D91F /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		F999C1BE182C6B8900B428A4 /* SK1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SK1.h; sourceTree = "<group>"; };
-		F999C1BF182C6B8900B428A4 /* SK1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SK1.m; sourceTree = "<group>"; };
+		F999C1BE182C6B8900B428A4 /* SKThing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKThing.h; sourceTree = "<group>"; };
+		F999C1BF182C6B8900B428A4 /* SKThing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKThing.m; sourceTree = "<group>"; };
 		F999C1C11833E59100B428A4 /* SKBus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKBus.h; sourceTree = "<group>"; };
 		F999C1C21833E59100B428A4 /* SKBus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKBus.m; sourceTree = "<group>"; };
 		F9A54A5E1833EA1100444855 /* SKAudio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKAudio.h; sourceTree = "<group>"; };
@@ -123,8 +123,8 @@
 		F9AD309D1828494C0029A51C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F9AD309F1828494C0029A51C /* SKViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SKViewController.h; sourceTree = "<group>"; };
 		F9AD30A01828494C0029A51C /* SKViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SKViewController.m; sourceTree = "<group>"; };
-		F9AD30A21828494C0029A51C /* SKMyScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SKMyScene.h; sourceTree = "<group>"; };
-		F9AD30A31828494C0029A51C /* SKMyScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SKMyScene.m; sourceTree = "<group>"; };
+		F9AD30A21828494C0029A51C /* SKField.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SKField.h; sourceTree = "<group>"; };
+		F9AD30A31828494C0029A51C /* SKField.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SKField.m; sourceTree = "<group>"; };
 		F9AD30A71828494C0029A51C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		F9AD30AD1828494C0029A51C /* SoundKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SoundKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9AD30AE1828494C0029A51C /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -256,12 +256,12 @@
 				F9AD309C1828494C0029A51C /* Main.storyboard */,
 				F9AD309F1828494C0029A51C /* SKViewController.h */,
 				F9AD30A01828494C0029A51C /* SKViewController.m */,
-				F9AD30A21828494C0029A51C /* SKMyScene.h */,
-				F9AD30A31828494C0029A51C /* SKMyScene.m */,
+				F9AD30A21828494C0029A51C /* SKField.h */,
+				F9AD30A31828494C0029A51C /* SKField.m */,
 				F9AD30A71828494C0029A51C /* Images.xcassets */,
 				F9AD30911828494C0029A51C /* Supporting Files */,
-				F999C1BE182C6B8900B428A4 /* SK1.h */,
-				F999C1BF182C6B8900B428A4 /* SK1.m */,
+				F999C1BE182C6B8900B428A4 /* SKThing.h */,
+				F999C1BF182C6B8900B428A4 /* SKThing.m */,
 			);
 			path = SoundKit;
 			sourceTree = "<group>";
@@ -436,10 +436,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				F9A54A851834281A00444855 /* SKNU.m in Sources */,
-				F9AD30A41828494C0029A51C /* SKMyScene.m in Sources */,
+				F9AD30A41828494C0029A51C /* SKField.m in Sources */,
 				F9AD309B1828494C0029A51C /* SKAppDelegate.m in Sources */,
 				F999C1C31833E59100B428A4 /* SKBus.m in Sources */,
-				F999C1C0182C6B8900B428A4 /* SK1.m in Sources */,
+				F999C1C0182C6B8900B428A4 /* SKThing.m in Sources */,
 				F9AD30A11828494C0029A51C /* SKViewController.m in Sources */,
 				F9A54A601833EA1100444855 /* SKAudio.m in Sources */,
 				F9A54A631834008100444855 /* SKAudioError.m in Sources */,

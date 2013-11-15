@@ -7,11 +7,11 @@
 //
 
 #import "SKViewController.h"
-#import "SKMyScene.h"
+#import "SKField.h"
 
 @implementation SKViewController
 
-SKMyScene * scene;
+SKField * scene;
 
 - (void)viewDidLoad
 {
@@ -30,7 +30,7 @@ SKMyScene * scene;
     [self.view addGestureRecognizer:pinch];
     
     // Create and configure the scene.
-    scene = [SKMyScene sceneWithSize:skView.bounds.size];
+    scene = [SKField sceneWithSize:skView.bounds.size];
     scene.scaleMode = SKSceneScaleModeAspectFill;
     
     // Present the scene.
@@ -60,7 +60,7 @@ SKMyScene * scene;
 
 - (IBAction)showGestureForPinchRecognizer:(UIPinchGestureRecognizer *)recognizer {
     // Get the location of the gesture
-    CGPoint location = [recognizer locationInView:self.view];
+//    CGPoint location = [recognizer locationInView:self.view];
     
     [scene setTimeScale:[recognizer scale]];
 }

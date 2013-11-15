@@ -6,22 +6,23 @@
 //  Copyright (c) 2013 david karam. All rights reserved.
 //
 
-#import "SKMyScene.h"
+#import "SKField.h"
 #import "SKAudio.h"
-#import "SK1.h"
+#import "SKThing.h"
 
-@implementation SKMyScene
+@implementation SKField
 
 CGPoint anchorPoint;
 SKNode *world;
 SKNode *camera;
-
+NSMutableArray *colors;
 SKAudio *sound;
 NSMutableArray *joints;
 NSMutableArray *scale;
 
 
--(id)initWithSize:(CGSize)size {    
+-(id)initWithSize:(CGSize)size
+{
     if (self = [super initWithSize:size]) {
         
         self.physicsBody = [SKPhysicsBody bodyWithEdgeLoopFromRect:self.frame];
@@ -31,22 +32,49 @@ NSMutableArray *scale;
         
         joints = [[NSMutableArray alloc] init];
 
+//        scale = [NSMutableArray arrayWithObjects:
+//                 [NSNumber numberWithInt:1],
+//                 [NSNumber numberWithInt:1],
+//                 [NSNumber numberWithInt:1],
+//                 [NSNumber numberWithInt:2],
+//                 [NSNumber numberWithInt:3],nil];
+        scale = [NSMutableArray arrayWithArray: @[@2, @2, @1, @2, @2, @2, @1]];
         
-        scale = [NSMutableArray arrayWithObjects:
-                 [NSNumber numberWithInt:2],
-                 [NSNumber numberWithInt:2],
-                 [NSNumber numberWithInt:3],
-                 [NSNumber numberWithInt:2],
-                 [NSNumber numberWithInt:3],nil];
+        colors = [NSMutableArray arrayWithArray: @[
+                                                   [SKColor colorWithRed:0 green:0 blue:1 alpha:1], //c tonic
+                                                   [SKColor colorWithRed:.5 green:0 blue:0 alpha:.1], //d M2
+                                                   [SKColor colorWithRed:.4 green:0 blue:.6 alpha:1], //e M3
+                                                   [SKColor colorWithRed:.3 green:0 blue:.8 alpha:1], //f M4
+                                                   [SKColor colorWithRed:.2 green:0 blue:1 alpha:1],//g P5
+                                                   [SKColor colorWithRed:.3 green:0 blue:0 alpha:1],//a M6
+                                                   [SKColor colorWithRed:.2 green:0 blue:0 alpha:.1],//b M7
+//                                                   [SKColor colorWithRed:0 green:0 blue:1 alpha:1], //c octave
+                   ]];
 
+        
+        NSArray * sizes = @[@20, @4, @12, @14, @20, @12, @4];
+
+        
         int pi = 32;
-        for (NSUInteger i = 0; i < 11; ++i) {
+        for (NSUInteger i = 0; i < 21; ++i)
+        {
             float p = (pi-32) / 70.0;
-            pi += [[scale objectAtIndex:(i % scale.count)] intValue];
-            SK1 *sk = [[SK1 alloc] initWithAlpha:p AndPitch:pi AndSize:(p+.15)*14 AndStroke:4 AndBus:[sound busAt:i%2]];
+            int type = i % 3;
+            float stroke = 4;
+            if (type == 0) stroke = 1;
+            
+            SKThing *sk = [[SKThing alloc] initWithAlpha:p
+                                                andPitch:pi
+                                                 andSize:[sizes[i % scale.count] intValue]
+                                               andStroke:stroke
+                                                andColor:colors[i % scale.count]
+                                                  andBus:[sound busAt:type]];
+            
             sk.position = CGPointMake(arc4random() % (int)size.width, arc4random() % (int)size.height);
             [self addChild:sk];
-        }
+
+            pi += [[scale objectAtIndex:(i % scale.count)] intValue];
+}
         
         
         self.physicsWorld.speed = 1.1;
@@ -103,11 +131,11 @@ NSMutableArray *scale;
 // stufu
 - (void)didBeginContact:(SKPhysicsContact *)contact
 {
-    SK1 *a = (SK1*) contact.bodyA.node;
-    BOOL anode = [a isKindOfClass:[SK1 class]];
+    SKThing *a = (SKThing*) contact.bodyA.node;
+    BOOL anode = [a isKindOfClass:[SKThing class]];
 
-    SK1 *b = (SK1*) contact.bodyB.node;
-    BOOL bnode = [b isKindOfClass:[SK1 class]];
+    SKThing *b = (SKThing*) contact.bodyB.node;
+    BOOL bnode = [b isKindOfClass:[SKThing class]];
     
     if (anode && bnode)
     {
@@ -146,14 +174,14 @@ SKSpriteNode *touchedNode;
     UITouch *touch = [touches anyObject];
     touchLocation = [touch locationInNode:self];
     touchedNode = (SKSpriteNode *)[self nodeAtPoint:touchLocation];
-    BOOL anode = [touchedNode isKindOfClass:[SK1 class]];
+    BOOL anode = [touchedNode isKindOfClass:[SKThing class]];
     if (anode)
         touchedNode.physicsBody.velocity = CGVectorMake(0,0);
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    BOOL anode = [touchedNode isKindOfClass:[SK1 class]];
+    BOOL anode = [touchedNode isKindOfClass:[SKThing class]];
     if (anode)
     {
         for (UITouch *touch in touches)
@@ -170,7 +198,7 @@ SKSpriteNode *touchedNode;
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    BOOL anode = [touchedNode isKindOfClass:[SK1 class]];
+    BOOL anode = [touchedNode isKindOfClass:[SKThing class]];
     if (anode)
     {
         for (UITouch *touch in touches)
