@@ -9,7 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
 
-@interface SKNU : NSObject 
+@interface SKNU : NSObject
+
 @property (readonly) int type;
 @property (readonly) int subtype;
 @property (readonly) AUNode node;
@@ -20,11 +21,11 @@
 @property (readonly) BOOL targetInitialized;
 
 - (id)   init:(int)type :(int)subtype;
-- (void) loadSF:(NSURL*)bankURL;
 - (void) node:(AUGraph)processingGraph ;
 - (void) unit:(AUGraph)processingGraph ;
 - (void) nu:(AUGraph)processingGraph ;
 - (void) wire:(AUGraph)processingGraph :(AUNode)target ;
 - (void) wire:(AUGraph)processingGraph :(AUNode)target :(int)targetInput;
-- (void) setIntProp:(int)a :(int)b :(UInt32)c;
+- (void) loadSF:(NSURL*)bankURL;
+- (void) setIntProp:(int)type :(int)subtype :(UInt32)value;
 @end

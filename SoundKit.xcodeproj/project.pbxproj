@@ -13,6 +13,9 @@
 		F918F532182AADFC00A2BFA4 /* Vintage Dreams Waves v2.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = F918F531182AADFC00A2BFA4 /* Vintage Dreams Waves v2.sf2 */; };
 		F918F534182AAE0500A2BFA4 /* HS Synthetic Electronic.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = F918F533182AAE0500A2BFA4 /* HS Synthetic Electronic.sf2 */; };
 		F93F987C1829AB7D0017D91F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F93F987B1829AB7D0017D91F /* Main.storyboard */; };
+		F94CF52B1836769F001D9C37 /* major.json in Resources */ = {isa = PBXBuildFile; fileRef = F94CF52A1836769F001D9C37 /* major.json */; };
+		F94CF52E18367C5C001D9C37 /* SKScale.m in Sources */ = {isa = PBXBuildFile; fileRef = F94CF52D18367C5C001D9C37 /* SKScale.m */; };
+		F94CF53118367D6D001D9C37 /* SKThingProp.m in Sources */ = {isa = PBXBuildFile; fileRef = F94CF53018367D6D001D9C37 /* SKThingProp.m */; };
 		F999C1C0182C6B8900B428A4 /* SKThing.m in Sources */ = {isa = PBXBuildFile; fileRef = F999C1BF182C6B8900B428A4 /* SKThing.m */; };
 		F999C1C31833E59100B428A4 /* SKBus.m in Sources */ = {isa = PBXBuildFile; fileRef = F999C1C21833E59100B428A4 /* SKBus.m */; };
 		F9A54A601833EA1100444855 /* SKAudio.m in Sources */ = {isa = PBXBuildFile; fileRef = F9A54A5F1833EA1100444855 /* SKAudio.m */; };
@@ -78,6 +81,11 @@
 		F918F531182AADFC00A2BFA4 /* Vintage Dreams Waves v2.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Vintage Dreams Waves v2.sf2"; sourceTree = "<group>"; };
 		F918F533182AAE0500A2BFA4 /* HS Synthetic Electronic.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HS Synthetic Electronic.sf2"; sourceTree = "<group>"; };
 		F93F987B1829AB7D0017D91F /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		F94CF52A1836769F001D9C37 /* major.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = major.json; sourceTree = "<group>"; };
+		F94CF52C18367C5C001D9C37 /* SKScale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKScale.h; sourceTree = "<group>"; };
+		F94CF52D18367C5C001D9C37 /* SKScale.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKScale.m; sourceTree = "<group>"; };
+		F94CF52F18367D6D001D9C37 /* SKThingProp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKThingProp.h; sourceTree = "<group>"; };
+		F94CF53018367D6D001D9C37 /* SKThingProp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKThingProp.m; sourceTree = "<group>"; };
 		F999C1BE182C6B8900B428A4 /* SKThing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKThing.h; sourceTree = "<group>"; };
 		F999C1BF182C6B8900B428A4 /* SKThing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKThing.m; sourceTree = "<group>"; };
 		F999C1C11833E59100B428A4 /* SKBus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKBus.h; sourceTree = "<group>"; };
@@ -175,6 +183,14 @@
 			name = iPad;
 			sourceTree = "<group>";
 		};
+		F94CF5281836766B001D9C37 /* Scales */ = {
+			isa = PBXGroup;
+			children = (
+				F94CF52A1836769F001D9C37 /* major.json */,
+			);
+			name = Scales;
+			sourceTree = "<group>";
+		};
 		F9A54A7218340D0800444855 /* SF2 */ = {
 			isa = PBXGroup;
 			children = (
@@ -247,6 +263,7 @@
 		F9AD30901828494C0029A51C /* SoundKit */ = {
 			isa = PBXGroup;
 			children = (
+				F94CF5281836766B001D9C37 /* Scales */,
 				F9C2FCDB182A8FA00056D6E2 /* Audio */,
 				F9C2FCD81829C7FC0056D6E2 /* AudioTest.xh */,
 				F9C2FCD91829C7FC0056D6E2 /* AudioTest.xm */,
@@ -262,6 +279,10 @@
 				F9AD30911828494C0029A51C /* Supporting Files */,
 				F999C1BE182C6B8900B428A4 /* SKThing.h */,
 				F999C1BF182C6B8900B428A4 /* SKThing.m */,
+				F94CF52C18367C5C001D9C37 /* SKScale.h */,
+				F94CF52D18367C5C001D9C37 /* SKScale.m */,
+				F94CF52F18367D6D001D9C37 /* SKThingProp.h */,
+				F94CF53018367D6D001D9C37 /* SKThingProp.m */,
 			);
 			path = SoundKit;
 			sourceTree = "<group>";
@@ -399,6 +420,7 @@
 				F918F530182AAD1600A2BFA4 /* tr808.sf2 in Resources */,
 				F918F534182AAE0500A2BFA4 /* HS Synthetic Electronic.sf2 in Resources */,
 				F9A54A92183436D000444855 /* 1115-Filter Bass 1.SF2 in Resources */,
+				F94CF52B1836769F001D9C37 /* major.json in Resources */,
 				F9A54A7018340B3A00444855 /* rtanpad1.sf2 in Resources */,
 				F9A54A93183436D000444855 /* 1115-Fingered bass One.sf2 in Resources */,
 				F9A54A99183436D000444855 /* Emu Planet Phatt Hip Hop.sf2 in Resources */,
@@ -437,8 +459,10 @@
 			files = (
 				F9A54A851834281A00444855 /* SKNU.m in Sources */,
 				F9AD30A41828494C0029A51C /* SKField.m in Sources */,
+				F94CF52E18367C5C001D9C37 /* SKScale.m in Sources */,
 				F9AD309B1828494C0029A51C /* SKAppDelegate.m in Sources */,
 				F999C1C31833E59100B428A4 /* SKBus.m in Sources */,
+				F94CF53118367D6D001D9C37 /* SKThingProp.m in Sources */,
 				F999C1C0182C6B8900B428A4 /* SKThing.m in Sources */,
 				F9AD30A11828494C0029A51C /* SKViewController.m in Sources */,
 				F9A54A601833EA1100444855 /* SKAudio.m in Sources */,

@@ -8,7 +8,9 @@
 
 #import "SKField.h"
 #import "SKAudio.h"
+#import "SKScale.h"
 #import "SKThing.h"
+#import "SKThingProp.h"
 
 @implementation SKField
 
@@ -27,53 +29,27 @@ NSMutableArray *scale;
         
         self.physicsBody = [SKPhysicsBody bodyWithEdgeLoopFromRect:self.frame];
         
-        
         sound = [[SKAudio alloc] init];
         
         joints = [[NSMutableArray alloc] init];
-
-//        scale = [NSMutableArray arrayWithObjects:
-//                 [NSNumber numberWithInt:1],
-//                 [NSNumber numberWithInt:1],
-//                 [NSNumber numberWithInt:1],
-//                 [NSNumber numberWithInt:2],
-//                 [NSNumber numberWithInt:3],nil];
-        scale = [NSMutableArray arrayWithArray: @[@2, @2, @1, @2, @2, @2, @1]];
         
-        colors = [NSMutableArray arrayWithArray: @[
-                                                   [SKColor colorWithRed:0 green:0 blue:1 alpha:1], //c tonic
-                                                   [SKColor colorWithRed:.5 green:0 blue:0 alpha:.1], //d M2
-                                                   [SKColor colorWithRed:.4 green:0 blue:.6 alpha:1], //e M3
-                                                   [SKColor colorWithRed:.3 green:0 blue:.8 alpha:1], //f M4
-                                                   [SKColor colorWithRed:.2 green:0 blue:1 alpha:1],//g P5
-                                                   [SKColor colorWithRed:.3 green:0 blue:0 alpha:1],//a M6
-                                                   [SKColor colorWithRed:.2 green:0 blue:0 alpha:.1],//b M7
-//                                                   [SKColor colorWithRed:0 green:0 blue:1 alpha:1], //c octave
-                   ]];
-
+        SKScale * scale = [[SKScale alloc] initWithJSONFile:@"major"];
         
-        NSArray * sizes = @[@20, @4, @12, @14, @20, @12, @4];
-
-        
-        int pi = 32;
         for (NSUInteger i = 0; i < 21; ++i)
         {
-            float p = (pi-32) / 70.0;
-            int type = i % 3;
-            float stroke = 4;
-            if (type == 0) stroke = 1;
             
-            SKThing *sk = [[SKThing alloc] initWithAlpha:p
-                                                andPitch:pi
-                                                 andSize:[sizes[i % scale.count] intValue]
-                                               andStroke:stroke
-                                                andColor:colors[i % scale.count]
-                                                  andBus:[sound busAt:type]];
+            int pitch = [scale pitchAt:i];
+            SKThingProp * prop = [scale propAt:i];
+            SKThing *sk = [[SKThing alloc] initWithAlpha:1
+                                                andPitch:pitch
+                                                 andSize:prop.size
+                                               andStroke:1
+                                                andColor:prop.color
+                                                  andBus:[sound busAt:i%3]];
             
             sk.position = CGPointMake(arc4random() % (int)size.width, arc4random() % (int)size.height);
             [self addChild:sk];
 
-            pi += [[scale objectAtIndex:(i % scale.count)] intValue];
 }
         
         
@@ -107,11 +83,13 @@ NSMutableArray *scale;
     }
     return self;
 }
+
 -(void)setTimeScale:(float)scale
 {
     NSLog(@"%f",scale);
     self.physicsWorld.speed = scale - .5;
 }
+
 
 
 

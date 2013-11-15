@@ -30,7 +30,7 @@
 {
     if ( self = [super init] )
     {
-        NSString*s = [[NSBundle mainBundle] pathForResource:path ofType:type];
+        NSString * s = [[NSBundle mainBundle] pathForResource:path ofType:type];
         _bankURL = [[NSURL alloc] initFileURLWithPath:s];;
     }
     
@@ -47,14 +47,12 @@
     [_sampler nu:processingGraph];
     [_sampler wire:processingGraph :_effect.node];
     [_sampler loadSF:_bankURL];
-    
 }
 
 
 - (void)noteOn:(UInt32)noteNum :(UInt32)velocity
 {
     UInt32 noteCommand = 0x90 | 0;
-//NSLog(@"playNoteOn %lu %lu cmd %lx", noteNum, velocity, noteCommand);
     OSStatus result = MusicDeviceMIDIEvent(_sampler.unit, noteCommand, noteNum, velocity, 0);
     [SKAudioError check:result :"noteOn"];
 }

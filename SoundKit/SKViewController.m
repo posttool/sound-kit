@@ -59,9 +59,7 @@ SKField * scene;
 
 
 - (IBAction)showGestureForPinchRecognizer:(UIPinchGestureRecognizer *)recognizer {
-    // Get the location of the gesture
-//    CGPoint location = [recognizer locationInView:self.view];
-    
+    // tell the scene about the pinch scale
     [scene setTimeScale:[recognizer scale]];
 }
 

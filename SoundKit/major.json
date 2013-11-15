@@ -1,0 +1,50 @@
+[
+    {
+        "pitch": 0,
+        "color": [0, 0, 1, 1],
+        "size": 20,
+        "name": "tonic"
+    },
+    
+    {
+        "pitch": 2,
+        "color": [0.5, 0, 0, 0.1],
+        "size":4,
+        "name": "M2"
+    },
+    
+    {
+        "pitch": 4,
+        "color": [0.4, 0, 0.6, 1],
+        "size": 12,
+        "name": "M3"
+    },
+    
+    {
+        "pitch": 5,
+        "color": [0.3, 0, 0.8, 1],
+        "size": 14,
+        "name": "M4"
+    },
+    
+    {
+        "pitch": 7,
+        "color": [0.2, 0, 1, 1],
+        "size": 20,
+        "name": "P5"
+    },
+    
+    {
+        "pitch": 9,
+        "color": [0.3, 0, 0.8, 1],
+        "size": 12,
+        "name": "M6"
+    },
+    
+    {
+        "pitch": 11,
+        "color": [0.2, 0, 0, 0.1],
+        "size": 4,
+        "name": "M7"
+    }
+]
