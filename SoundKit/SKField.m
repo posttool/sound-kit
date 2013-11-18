@@ -181,7 +181,7 @@ SKSpriteNode *touchedNode;
         for (UITouch *touch in touches)
         {
             CGPoint location = [touch locationInNode:self];
-            CGVector vec = CGVectorMake((location.x - touchLocation.x) * 11, (location.y - touchLocation.y) * 11);
+            CGVector vec = CGVectorMake((location.x - touchLocation.x) * 17, (location.y - touchLocation.y) * 17);
             [touchedNode.physicsBody applyForce:vec];
             break;
         }

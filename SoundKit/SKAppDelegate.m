@@ -7,12 +7,13 @@
 //
 
 #import "SKAppDelegate.h"
+#import "TestFlight.h"
 
 @implementation SKAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    [TestFlight takeOff:@"42e3ba07-4737-4745-b175-5917014dd5cb"];
     return YES;
 }
 							

@@ -25,8 +25,6 @@
 - (void) setMixerInput: (UInt32) inputBus gain: (AudioUnitParameterValue) inputGain;
 - (void) setMixerOutputGain: (AudioUnitParameterValue) outputGain;
 
-- (void) printErrorMessage: (NSString *) errorString withStatus: (OSStatus) result;
-
 - (SKBus*)busAt:(uint)i;
 
 @end

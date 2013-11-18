@@ -51,7 +51,7 @@
     OSStatus result = AUGraphAddNode(processingGraph, &cd, &_node);
     [SKAudioError check:result :"add node"];
     _nodeInitialized = YES;
-    NSLog(@"added node");
+//    NSLog(@"added node");
 }
 
 - (void) unit:(AUGraph)processingGraph
@@ -63,7 +63,7 @@
     OSStatus result = AUGraphNodeInfo(processingGraph, self.node, NULL, &_unit);
     [SKAudioError check:result :"set node info"];
     _unitInitialized = YES;
-    NSLog(@"added unit");
+//    NSLog(@"added unit");
 }
 
 - (void) nu:(AUGraph)processingGraph
@@ -88,7 +88,7 @@
     [SKAudioError check:result :"connect node input"];
 //    _target = target;
     _targetInitialized = YES;
-    NSLog(@"wired to target");
+//    NSLog(@"wired to target");
 }
 
 - (void) setIntProp:(int)a :(int)b :(UInt32)c;

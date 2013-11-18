@@ -35,25 +35,13 @@
     //    '-()--------()-'
     
     
-//    t = [[SKBus alloc] init:@"HS Synthetic Electronic" :@"sf2"];
-//    t = [[SKBus alloc] init:@"JK_Pads" :@"SF2"];
-//    t = [[SKBus alloc] init:@"Johansson_BeautifulPad" :@"sf2"];
-//    t = [[SKBus alloc] init:@"jonnypad6" :@"SF2"];
-//    t = [[SKBus alloc] init:@"jonnypad8" :@"SF2"];
-//    t = [[SKBus alloc] init:@"rtanpad1" :@"SF2"];
-//    t = [[SKBus alloc] init:@"Vintage Dreams Waves v2" :@"sf2"];
-//    t = [[SKBus alloc] init:@"hs-pad-texts" :@"sf2"];
-//    t = [[SKBus alloc] init:@"tr808" :@"SF2"];
-//    t = [[SKBus alloc] init:@"Gorts_Filters" :@"SF2"];
-//    t = [[SKBus alloc] init:@"HS Synthetic Electronic" :@"sf2"];
-//    t = [[SKBus alloc] init:@"synth" :@"sf2"];
-//    t = [[SKBus alloc] init:@"mood" :@"sf2"];
     
     buses = [[NSMutableArray alloc] init];
     
-    [self addSF2Bus:@"vibra" :0 :.6];
-    [self addSF2Bus:@"vibra" :1 :.6];
-    [self addSF2Bus:@"vibra" :2 :.6];
+    [self addSF2Bus:@"ProTrax_Classical_Guitar" :0 :.7];
+    [self addSF2Bus:@"ProTrax_Classical_Guitar" :1 :.5];
+    [self addSF2Bus:@"ProTrax_Classical_Guitar" :2 :.3];
+
 
 
     NSLog (@"Audio processing graph state immediately before starting it:");
@@ -68,7 +56,7 @@
     SKBus *t;
     t = [[SKBus alloc] init:sf2name :@"sf2"];
     [t wire:processingGraph :mixer.node :channel];
-    [self setMixerInput:0 gain:gain];
+    [self setMixerInput:channel gain:gain];
     [buses addObject:t];
     return t;
 }
@@ -103,7 +91,8 @@
     
     mixer = [[SKNU alloc] init:kAudioUnitType_Mixer :kAudioUnitSubType_MultiChannelMixer];
     [mixer node:processingGraph];
-
+    
+    
     //............................................................................
     // open the audio processing graph
     
@@ -120,12 +109,11 @@
     //............................................................................
     // set up the mixer properties
     
-    [mixer setIntProp:kAudioUnitProperty_ElementCount :kAudioUnitScope_Input :2];
-    [mixer setIntProp:kAudioUnitProperty_MaximumFramesPerSlice :kAudioUnitScope_Global :4096];
+    [mixer setIntProp:kAudioUnitProperty_ElementCount :kAudioUnitScope_Input :3];
+//    [mixer setIntProp:kAudioUnitProperty_MaximumFramesPerSlice :kAudioUnitScope_Global :4096];
 
     //............................................................................
-    // wire mixer to io
-
+    // wire mixer to effect to io
     [mixer wire:processingGraph :io.node];
 
     //............................................................................
@@ -200,12 +188,12 @@
     NSLog (@"Stopping audio processing graph");
     Boolean isRunning = false;
     OSStatus result = AUGraphIsRunning (processingGraph, &isRunning);
-    if (noErr != result) {[self printErrorMessage: @"AUGraphIsRunning" withStatus: result]; return;}
+    [SKAudioError check:result :"AUGraphIsRunning"];
     
     if (isRunning) {
     
         result = AUGraphStop (processingGraph);
-        if (noErr != result) {[self printErrorMessage: @"AUGraphStop" withStatus: result]; return;}
+        [SKAudioError check:result :"STOP"];
         self.playing = NO;
     }
 }
@@ -227,7 +215,7 @@
                          0
                       );
 
-    if (noErr != result) {[self printErrorMessage: @"AudioUnitSetParameter (enable the mixer unit)" withStatus: result]; return;}
+    [SKAudioError check:result :"AudioUnitSetParameter (enable the mixer unit"];
     
 
 }
@@ -246,8 +234,8 @@
                          0
                       );
 
-    if (noErr != result) {[self printErrorMessage: @"AudioUnitSetParameter (set mixer unit input volume)" withStatus: result]; return;}
-    
+    [SKAudioError check:result :"AudioUnitSetParameter2"];
+   
 }
 
 
@@ -262,9 +250,8 @@
                          newGain,
                          0
                       );
-
-    if (noErr != result) {[self printErrorMessage: @"AudioUnitSetParameter (set mixer unit output volume)" withStatus: result]; return;}
-    
+    [SKAudioError check:result :"AudioUnitSetParameter3"];
+   
 }
 
 
@@ -350,19 +337,19 @@
 //}
 
 
-- (void) printErrorMessage: (NSString *) errorString withStatus: (OSStatus) result {
-
-    char resultString[5];
-    UInt32 swappedResult = CFSwapInt32HostToBig (result);
-    bcopy (&swappedResult, resultString, 4);
-    resultString[4] = '\0';
-
-    NSLog (
-        @"*** %@ error: %d %08X %4.4s\n",
-                errorString,
-                (char*) &resultString
-    );
-}
+//- (void) printErrorMessage: (NSString *) errorString withStatus: (OSStatus) result {
+//
+//    char resultString[5];
+//    UInt32 swappedResult = CFSwapInt32HostToBig (result);
+//    bcopy (&swappedResult, resultString, 4);
+//    resultString[4] = '\0';
+//
+//    NSLog (
+//        @"*** %@ error: %d %08X %4.4s\n",
+//                errorString,
+//                (char*) &resultString
+//    );
+//}
 
 
 @end

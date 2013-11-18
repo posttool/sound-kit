@@ -47,7 +47,7 @@
         self.physicsBody.collisionBitMask = 1;
         self.physicsBody.contactTestBitMask = 1;
         self.physicsBody.friction = 0;
-        self.physicsBody.restitution = .9;
+        self.physicsBody.restitution = .96;
         self.physicsBody.linearDamping = 0;
 
     }
@@ -64,7 +64,7 @@
 {
     self.fillColor = [SKColor colorWithRed:.93 green:.96 blue:.90 alpha:.9];
 }
--(void)contact
+-(void)contact//:(NSArray*)pattern
 {
     if (self.playing)
         return;
@@ -76,9 +76,9 @@
     int s = arc4random() % 3 + 3;
     for (int i=0; i<s; i++)
     {
-        float p = 3 *i/(float)s+1;//arc4random() % 3 ;
-        float d = p * 0.3 + .3;
-        [sa addObject:[SKAction runBlock:^(void){ [_bus noteOn:self.pitch :(i == 0) ? 127: 33]; }]];
+        //float p = 3 *i/(float)s+1;//arc4random() % 3 ;
+        float d = arc4random()%2 == 0 ? 0.3 : 0.6; //pattern[i].duration
+        [sa addObject:[SKAction runBlock:^(void){ [_bus noteOn:self.pitch :(i == 0) ? 127: 66]; }]];
         [sa addObject:[self one:.1 :(i == 0) ? 20: 6]];
         [sa addObject:[self two:d-.1 :(i == 0) ? 20: 6]];
     }
@@ -92,7 +92,7 @@
 {
     return [SKAction customActionWithDuration:time actionBlock:^(SKNode *node, CGFloat elapsedTime) {
         float r = elapsedTime/time;
-        self.yScale = self.xScale = r*5+1;
+        self.yScale = self.xScale = r*(gscale/4.0)+1;
         self.glowWidth = r*gscale;
     }];
 }

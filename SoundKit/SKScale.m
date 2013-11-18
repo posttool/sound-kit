@@ -28,7 +28,7 @@
             [_scale addObject:[[SKThingProp alloc] initWithDict:d]];
         }
         _allPitches = [[NSMutableArray alloc] init];
-        for (int i = 0; i < 8; i++)
+        for (int i = 0; i < 12; i++)
         {
             for (int j = 0; j < [_scale count]; j++)
             {
