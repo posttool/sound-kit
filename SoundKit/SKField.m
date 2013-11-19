@@ -22,6 +22,7 @@ SKAudio *sound;
 NSMutableArray *joints;
 NSMutableArray *scale;
 
+SKShapeNode *touch;
 
 -(id)initWithSize:(CGSize)size
 {
@@ -77,6 +78,11 @@ NSMutableArray *scale;
 //                                                     }
 //                                                 }];
         
+        touch = [SKShapeNode node];
+        touch.lineWidth = .1;
+        touch.strokeColor = [[SKColor alloc] initWithRed:1 green:1 blue:1 alpha:1];
+
+        [self addChild:touch];
         
         
     }
@@ -143,50 +149,57 @@ NSMutableArray *scale;
 //size
 //scale
 
-CGPoint touchLocation;
-SKSpriteNode *touchedNode;
+NSMutableArray *touchLocations;
+NSMutableArray *touchedNodes;
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    UITouch *touch = [touches anyObject];
-    touchLocation = [touch locationInNode:self];
-    touchedNode = (SKSpriteNode *)[self nodeAtPoint:touchLocation];
-    BOOL anode = [touchedNode isKindOfClass:[SKThing class]];
-    if (anode)
-        touchedNode.physicsBody.velocity = CGVectorMake(0,0);
+    touchedNodes = [[NSMutableArray alloc] init];
+    touchLocations = [[NSMutableArray alloc] init];
+    for (UITouch *touch in touches)
+    {
+        CGPoint location = [touch locationInNode:self];
+        SKSpriteNode * touchedNode = (SKSpriteNode *)[self nodeAtPoint:location];
+        BOOL isThing = [touchedNode isKindOfClass:[SKThing class]];
+        if (isThing)
+        {
+            [touchedNodes addObject:touchedNode];
+            [touchLocations addObject:[[NSMutableArray alloc]initWithObjects:[NSValue valueWithCGPoint:location], nil]];
+            touchedNode.physicsBody.velocity = CGVectorMake(0,0);
+        }
+    }
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    BOOL anode = [touchedNode isKindOfClass:[SKThing class]];
-    if (anode)
+    for (int i=0; i < touchedNodes.count; i++)
     {
-        for (UITouch *touch in touches)
-        {
-            CGPoint location = [touch locationInNode:self];
-            touchedNode.position = location;
-            break;
-        }
-    }
-    else
-    {
-        
+        SKThing * thing = [touchedNodes objectAtIndex:i];
+        UITouch * touch = [[touches objectEnumerator] nextObject];
+        CGPoint location = [touch locationInNode:self];
+        thing.position = location;
+        NSMutableArray * locs = [touchLocations objectAtIndex:i];
+        [locs addObject:[NSValue valueWithCGPoint:location]];
     }
 }
 
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    BOOL anode = [touchedNode isKindOfClass:[SKThing class]];
-    if (anode)
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    for (int i=0; i < touchedNodes.count; i++)
     {
-        for (UITouch *touch in touches)
-        {
-            CGPoint location = [touch locationInNode:self];
-            CGVector vec = CGVectorMake((location.x - touchLocation.x) * 17, (location.y - touchLocation.y) * 17);
-            [touchedNode.physicsBody applyForce:vec];
-            break;
-        }
-        [self setTimeScale:1];
+        SKThing * thing = [touchedNodes objectAtIndex:i];
+        UITouch * touch = [[touches objectEnumerator] nextObject];
+        CGPoint location = [touch locationInNode:self];
+        thing.position = location;
+        NSMutableArray * locs = [touchLocations objectAtIndex:i];
+        CGPoint lastLoc = [[locs lastObject] CGPointValue];
+        CGVector vec = CGVectorMake((location.x - lastLoc.x) * 17, (location.y - lastLoc.y) * 17);
+        [thing.physicsBody applyForce:vec];
     }
+    [touchedNodes removeAllObjects];
+    [touchLocations removeAllObjects];
+    touch.path = nil;
+    [self setTimeScale:1];
 }
 
 
@@ -194,7 +207,22 @@ SKSpriteNode *touchedNode;
 
 -(void)update:(CFTimeInterval)currentTime
 {
-    /* Called before each frame is rendered */
+    if (touchLocations.count != 0)
+    {
+        NSLog(@"touches=%@",touchLocations);
+        CGMutablePathRef path = CGPathCreateMutable();
+        CGAffineTransform t = CGAffineTransformMakeTranslation(0,0);//-self.size.width/2, -self.size.height/2
+        NSArray *p = [touchLocations objectAtIndex:0];
+        CGPoint ps[p.count];
+        for (int i=0; i < p.count; i++)
+        {
+            NSValue * v = [p objectAtIndex:i];
+            ps[i] = [v CGPointValue];
+        }
+        NSLog(@"PATH=%@",p);
+        CGPathAddLines(path, &t, ps, p.count);
+        touch.path = path;
+    }
 }
 
 @end
