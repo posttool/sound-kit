@@ -12,12 +12,11 @@
 
 @synthesize color = _color;
 @synthesize pitch = _pitch;
-@synthesize alpha = _alpha;
 @synthesize size = _size;
 @synthesize playing = _playing;
 @synthesize bus = _bus;
 
-- (id) initWithAlpha:(float)alpha andPitch:(int)pitch andSize:(int)size andColor:(SKColor*)color andBus:(SKBus*)bus
+- (id) initWithPitch:(int)pitch andSize:(int)size andColor:(SKColor*)color andBus:(SKBus*)bus
 {
     self = [super init];
     
@@ -25,15 +24,17 @@
     {
         _color = color;
         _pitch = pitch;
-        _alpha = alpha;
         _size = size;
         _playing = false;
         _bus = bus;
         
+        CGSize size = CGSizeMake(self.size*.5, self.size);
+        CGRect rect = CGRectMake(0, 0, size.width, size.height);
+        
         CGMutablePathRef path = CGPathCreateMutable();
 //        CGPathAddArc(path, NULL, 0,0, self.size, 0, M_PI*2, YES);
-        CGAffineTransform t = CGAffineTransformMakeTranslation(-self.size/2, -self.size/2);
-        CGPathAddRect(path, &t, CGRectMake(0,0,self.size, self.size));
+        CGAffineTransform t = CGAffineTransformMakeTranslation(-size.width/2, -size.height/2);
+        CGPathAddRect(path, &t, rect);
         self.path = path;
         [self color1];
         self.lineWidth = .1;
@@ -41,7 +42,7 @@
         self.glowWidth = 0;
         
 //        self.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:self.size];
-        self.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(self.size, self.size)];
+        self.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:size];
         self.physicsBody.dynamic = YES;
         self.physicsBody.categoryBitMask = 1;
         self.physicsBody.collisionBitMask = 1;
@@ -66,8 +67,8 @@
 }
 -(void)contact//:(NSArray*)pattern
 {
-    if (self.playing)
-        return;
+//    if (self.playing)
+//        return;
 //    if (arc4random()%10==1)
 //        self.pitch += (arc4random()%10)-5;
 //    NSLog(@"pitch=%d", self.pitch);
@@ -77,14 +78,18 @@
     for (int i=0; i<s; i++)
     {
         //float p = 3 *i/(float)s+1;//arc4random() % 3 ;
-        float d = arc4random()%2 == 0 ? 0.3 : 0.6; //pattern[i].duration
+        float d = arc4random()%2 == 0 ? 0.5 : 1.0; //pattern[i].duration
         [sa addObject:[SKAction runBlock:^(void){ [_bus noteOn:self.pitch :(i == 0) ? 127: 66]; }]];
         [sa addObject:[self one:.1 :(i == 0) ? 20: 6]];
         [sa addObject:[self two:d-.1 :(i == 0) ? 20: 6]];
     }
+    [sa addObject:[SKAction waitForDuration:1.0]];
     [sa addObject:[SKAction runBlock:^(void){ [_bus noteOff:self.pitch ]; _playing = NO; }]];
 
+//    if (_playing)
+//        [_bus noteOff:self.pitch ];
     _playing = YES;
+    [self removeAllActions];
     [self runAction:[SKAction sequence:sa]];
 }
 
@@ -106,4 +111,10 @@
     }];
 }
 
+-(void)destroy
+{
+    [self removeAllActions];
+    [_bus noteOff:self.pitch];
+    [self removeFromParent];
+}
 @end

@@ -15,8 +15,28 @@
 		F94CF53C183AA5D5001D9C37 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F94CF536183AA5D5001D9C37 /* libTestFlight.a */; };
 		F94CF53D183AA5D5001D9C37 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = F94CF537183AA5D5001D9C37 /* README.md */; };
 		F94CF540183AA6D8001D9C37 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F94CF53F183AA6D8001D9C37 /* libz.dylib */; };
-		F94CF554183AC453001D9C37 /* Recorder_Soprano.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = F94CF545183AC453001D9C37 /* Recorder_Soprano.sf2 */; };
-		F94CF564183AC497001D9C37 /* ProTrax_Classical_Guitar.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = F94CF563183AC46D001D9C37 /* ProTrax_Classical_Guitar.sf2 */; };
+		F94CF5A9183C0BC7001D9C37 /* pad 2ndOrder.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = F94CF593183C0BC7001D9C37 /* pad 2ndOrder.sf2 */; };
+		F94CF5AA183C0BC7001D9C37 /* pad Air Gtrs.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = F94CF594183C0BC7001D9C37 /* pad Air Gtrs.sf2 */; };
+		F94CF5AB183C0BC7001D9C37 /* pad Alaska.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = F94CF595183C0BC7001D9C37 /* pad Alaska.sf2 */; };
+		F94CF5AC183C0BC7001D9C37 /* pad Aylius.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = F94CF596183C0BC7001D9C37 /* pad Aylius.sf2 */; };
+		F94CF5AD183C0BC7001D9C37 /* pad BelChoir.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = F94CF597183C0BC7001D9C37 /* pad BelChoir.sf2 */; };
+		F94CF5AE183C0BC7001D9C37 /* pad Contnent.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = F94CF598183C0BC7001D9C37 /* pad Contnent.sf2 */; };
+		F94CF5AF183C0BC7001D9C37 /* pad DarkSaws.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = F94CF599183C0BC7001D9C37 /* pad DarkSaws.sf2 */; };
+		F94CF5B0183C0BC7001D9C37 /* pad Dragon.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = F94CF59A183C0BC7001D9C37 /* pad Dragon.sf2 */; };
+		F94CF5B1183C0BC7001D9C37 /* pad Escape.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = F94CF59B183C0BC7001D9C37 /* pad Escape.sf2 */; };
+		F94CF5B2183C0BC7001D9C37 /* pad FiltWhll.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = F94CF59C183C0BC7001D9C37 /* pad FiltWhll.sf2 */; };
+		F94CF5B3183C0BC7001D9C37 /* pad FltrStik.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = F94CF59D183C0BC7001D9C37 /* pad FltrStik.sf2 */; };
+		F94CF5B4183C0BC7001D9C37 /* pad GabesGtr.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = F94CF59E183C0BC7001D9C37 /* pad GabesGtr.sf2 */; };
+		F94CF5B5183C0BC7001D9C37 /* pad Matrix.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = F94CF59F183C0BC7001D9C37 /* pad Matrix.sf2 */; };
+		F94CF5B6183C0BC7001D9C37 /* pad Med Moog.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = F94CF5A0183C0BC7001D9C37 /* pad Med Moog.sf2 */; };
+		F94CF5B7183C0BC7001D9C37 /* pad Mute Vox.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = F94CF5A1183C0BC7001D9C37 /* pad Mute Vox.sf2 */; };
+		F94CF5B8183C0BC7001D9C37 /* pad OBXwin.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = F94CF5A2183C0BC7001D9C37 /* pad OBXwin.sf2 */; };
+		F94CF5B9183C0BC7001D9C37 /* pad P5 Piper.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = F94CF5A3183C0BC7001D9C37 /* pad P5 Piper.sf2 */; };
+		F94CF5BA183C0BC7001D9C37 /* pad P5 Pulse.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = F94CF5A4183C0BC7001D9C37 /* pad P5 Pulse.sf2 */; };
+		F94CF5BB183C0BC7001D9C37 /* pad P5Filter.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = F94CF5A5183C0BC7001D9C37 /* pad P5Filter.sf2 */; };
+		F94CF5BC183C0BC7001D9C37 /* pad PolyMoog.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = F94CF5A6183C0BC7001D9C37 /* pad PolyMoog.sf2 */; };
+		F94CF5BD183C0BC7001D9C37 /* pad Sky Saw.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = F94CF5A7183C0BC7001D9C37 /* pad Sky Saw.sf2 */; };
+		F94CF5BE183C0BC7001D9C37 /* pad Ye-ei-ei.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = F94CF5A8183C0BC7001D9C37 /* pad Ye-ei-ei.sf2 */; };
 		F999C1C0182C6B8900B428A4 /* SKThing.m in Sources */ = {isa = PBXBuildFile; fileRef = F999C1BF182C6B8900B428A4 /* SKThing.m */; };
 		F999C1C31833E59100B428A4 /* SKBus.m in Sources */ = {isa = PBXBuildFile; fileRef = F999C1C21833E59100B428A4 /* SKBus.m */; };
 		F9A54A601833EA1100444855 /* SKAudio.m in Sources */ = {isa = PBXBuildFile; fileRef = F9A54A5F1833EA1100444855 /* SKAudio.m */; };
@@ -41,7 +61,6 @@
 		F9AD30CC182875770029A51C /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9AD30CB182875770029A51C /* Accelerate.framework */; };
 		F9AD30D0182875850029A51C /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9AD30CF182875850029A51C /* CoreAudio.framework */; };
 		F9AD30D2182875FD0029A51C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9AD30D1182875FD0029A51C /* AudioToolbox.framework */; };
-		F9C2FCDA1829C7FC0056D6E2 /* AudioTest.xm in Sources */ = {isa = PBXBuildFile; fileRef = F9C2FCD91829C7FC0056D6E2 /* AudioTest.xm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,11 +74,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		F918F524182A9B9300A2BFA4 /* Gorts_Filters.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Gorts_Filters.sf2; sourceTree = "<group>"; };
-		F918F52D182AAD0300A2BFA4 /* hs-pad-texts.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "hs-pad-texts.sf2"; sourceTree = "<group>"; };
-		F918F52F182AAD1600A2BFA4 /* tr808.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = tr808.sf2; sourceTree = "<group>"; };
-		F918F531182AADFC00A2BFA4 /* Vintage Dreams Waves v2.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Vintage Dreams Waves v2.sf2"; sourceTree = "<group>"; };
-		F918F533182AAE0500A2BFA4 /* HS Synthetic Electronic.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HS Synthetic Electronic.sf2"; sourceTree = "<group>"; };
 		F93F987B1829AB7D0017D91F /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		F94CF52A1836769F001D9C37 /* major.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = major.json; sourceTree = "<group>"; };
 		F94CF52C18367C5C001D9C37 /* SKScale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKScale.h; sourceTree = "<group>"; };
@@ -75,24 +89,28 @@
 		F94CF53A183AA5D5001D9C37 /* TestFlight+ManualSessions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+ManualSessions.h"; sourceTree = "<group>"; };
 		F94CF53B183AA5D5001D9C37 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
 		F94CF53F183AA6D8001D9C37 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
-		F94CF541183ABF35001D9C37 /* ChoriumRevA.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = ChoriumRevA.sf2; sourceTree = "<group>"; };
-		F94CF543183AC393001D9C37 /* Synth512.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Synth512.sf2; sourceTree = "<group>"; };
-		F94CF545183AC453001D9C37 /* Recorder_Soprano.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Recorder_Soprano.sf2; sourceTree = "<group>"; };
-		F94CF546183AC453001D9C37 /* ElPiano1.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = ElPiano1.sf2; sourceTree = "<group>"; };
-		F94CF547183AC453001D9C37 /* Pianino.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Pianino.sf2; sourceTree = "<group>"; };
-		F94CF548183AC453001D9C37 /* Warm_Lead_MDX7.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Warm_Lead_MDX7.sf2; sourceTree = "<group>"; };
-		F94CF549183AC453001D9C37 /* Fretless_Bass_Stereo.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Fretless_Bass_Stereo.sf2; sourceTree = "<group>"; };
-		F94CF54A183AC453001D9C37 /* K_Strings.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = K_Strings.sf2; sourceTree = "<group>"; };
-		F94CF54B183AC453001D9C37 /* English_Horn.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = English_Horn.sf2; sourceTree = "<group>"; };
-		F94CF54C183AC453001D9C37 /* Synth_Bass.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Synth_Bass.sf2; sourceTree = "<group>"; };
-		F94CF54D183AC453001D9C37 /* Chemical_Clarinet_MDX7.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Chemical_Clarinet_MDX7.sf2; sourceTree = "<group>"; };
-		F94CF54E183AC453001D9C37 /* Clean_Guitar.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Clean_Guitar.sf2; sourceTree = "<group>"; };
-		F94CF54F183AC453001D9C37 /* Jazz_Guitar.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Jazz_Guitar.sf2; sourceTree = "<group>"; };
-		F94CF550183AC453001D9C37 /* Zero_Lead_MDX7.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Zero_Lead_MDX7.sf2; sourceTree = "<group>"; };
-		F94CF551183AC453001D9C37 /* Zed_Bass_2PM.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Zed_Bass_2PM.sf2; sourceTree = "<group>"; };
-		F94CF552183AC453001D9C37 /* Crazy_Crystal_MDX7.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Crazy_Crystal_MDX7.sf2; sourceTree = "<group>"; };
-		F94CF553183AC453001D9C37 /* Roll_Pad_MDX7.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Roll_Pad_MDX7.sf2; sourceTree = "<group>"; };
-		F94CF563183AC46D001D9C37 /* ProTrax_Classical_Guitar.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = ProTrax_Classical_Guitar.sf2; sourceTree = "<group>"; };
+		F94CF593183C0BC7001D9C37 /* pad 2ndOrder.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "pad 2ndOrder.sf2"; sourceTree = "<group>"; };
+		F94CF594183C0BC7001D9C37 /* pad Air Gtrs.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "pad Air Gtrs.sf2"; sourceTree = "<group>"; };
+		F94CF595183C0BC7001D9C37 /* pad Alaska.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "pad Alaska.sf2"; sourceTree = "<group>"; };
+		F94CF596183C0BC7001D9C37 /* pad Aylius.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "pad Aylius.sf2"; sourceTree = "<group>"; };
+		F94CF597183C0BC7001D9C37 /* pad BelChoir.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "pad BelChoir.sf2"; sourceTree = "<group>"; };
+		F94CF598183C0BC7001D9C37 /* pad Contnent.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "pad Contnent.sf2"; sourceTree = "<group>"; };
+		F94CF599183C0BC7001D9C37 /* pad DarkSaws.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "pad DarkSaws.sf2"; sourceTree = "<group>"; };
+		F94CF59A183C0BC7001D9C37 /* pad Dragon.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "pad Dragon.sf2"; sourceTree = "<group>"; };
+		F94CF59B183C0BC7001D9C37 /* pad Escape.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "pad Escape.sf2"; sourceTree = "<group>"; };
+		F94CF59C183C0BC7001D9C37 /* pad FiltWhll.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "pad FiltWhll.sf2"; sourceTree = "<group>"; };
+		F94CF59D183C0BC7001D9C37 /* pad FltrStik.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "pad FltrStik.sf2"; sourceTree = "<group>"; };
+		F94CF59E183C0BC7001D9C37 /* pad GabesGtr.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "pad GabesGtr.sf2"; sourceTree = "<group>"; };
+		F94CF59F183C0BC7001D9C37 /* pad Matrix.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "pad Matrix.sf2"; sourceTree = "<group>"; };
+		F94CF5A0183C0BC7001D9C37 /* pad Med Moog.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "pad Med Moog.sf2"; sourceTree = "<group>"; };
+		F94CF5A1183C0BC7001D9C37 /* pad Mute Vox.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "pad Mute Vox.sf2"; sourceTree = "<group>"; };
+		F94CF5A2183C0BC7001D9C37 /* pad OBXwin.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "pad OBXwin.sf2"; sourceTree = "<group>"; };
+		F94CF5A3183C0BC7001D9C37 /* pad P5 Piper.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "pad P5 Piper.sf2"; sourceTree = "<group>"; };
+		F94CF5A4183C0BC7001D9C37 /* pad P5 Pulse.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "pad P5 Pulse.sf2"; sourceTree = "<group>"; };
+		F94CF5A5183C0BC7001D9C37 /* pad P5Filter.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "pad P5Filter.sf2"; sourceTree = "<group>"; };
+		F94CF5A6183C0BC7001D9C37 /* pad PolyMoog.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "pad PolyMoog.sf2"; sourceTree = "<group>"; };
+		F94CF5A7183C0BC7001D9C37 /* pad Sky Saw.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "pad Sky Saw.sf2"; sourceTree = "<group>"; };
+		F94CF5A8183C0BC7001D9C37 /* pad Ye-ei-ei.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "pad Ye-ei-ei.sf2"; sourceTree = "<group>"; };
 		F999C1BE182C6B8900B428A4 /* SKThing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKThing.h; sourceTree = "<group>"; };
 		F999C1BF182C6B8900B428A4 /* SKThing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKThing.m; sourceTree = "<group>"; };
 		F999C1C11833E59100B428A4 /* SKBus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKBus.h; sourceTree = "<group>"; };
@@ -101,26 +119,8 @@
 		F9A54A5F1833EA1100444855 /* SKAudio.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKAudio.m; sourceTree = "<group>"; };
 		F9A54A611834008100444855 /* SKAudioError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKAudioError.h; sourceTree = "<group>"; };
 		F9A54A621834008100444855 /* SKAudioError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKAudioError.m; sourceTree = "<group>"; };
-		F9A54A6418340B3A00444855 /* JK_Pads.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = JK_Pads.sf2; sourceTree = "<group>"; };
-		F9A54A6518340B3A00444855 /* Johansson_BeautifulPad.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Johansson_BeautifulPad.sf2; sourceTree = "<group>"; };
-		F9A54A6718340B3A00444855 /* jonnypad6.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = jonnypad6.sf2; sourceTree = "<group>"; };
-		F9A54A6818340B3A00444855 /* jonnypad8.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = jonnypad8.sf2; sourceTree = "<group>"; };
-		F9A54A6918340B3A00444855 /* rtanpad1.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = rtanpad1.sf2; sourceTree = "<group>"; };
-		F9A54A731834110D00444855 /* synth.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = synth.sf2; sourceTree = "<group>"; };
-		F9A54A741834110D00444855 /* mood.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = mood.sf2; sourceTree = "<group>"; };
-		F9A54A751834110D00444855 /* male.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = male.sf2; sourceTree = "<group>"; };
-		F9A54A761834110D00444855 /* vibra.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = vibra.sf2; sourceTree = "<group>"; };
-		F9A54A771834110D00444855 /* string.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = string.sf2; sourceTree = "<group>"; };
-		F9A54A781834110D00444855 /* organ.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = organ.sf2; sourceTree = "<group>"; };
 		F9A54A831834281A00444855 /* SKNU.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKNU.h; sourceTree = "<group>"; };
 		F9A54A841834281A00444855 /* SKNU.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKNU.m; sourceTree = "<group>"; };
-		F9A54A86183436D000444855 /* 2rock9.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 2rock9.sf2; sourceTree = "<group>"; };
-		F9A54A87183436D000444855 /* 1115-BassPONK.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "1115-BassPONK.sf2"; sourceTree = "<group>"; };
-		F9A54A89183436D000444855 /* 1115-Fingered bass One.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "1115-Fingered bass One.sf2"; sourceTree = "<group>"; };
-		F9A54A8B183436D000444855 /* ACOUSTC-BASS.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ACOUSTC-BASS.sf2"; sourceTree = "<group>"; };
-		F9A54A8C183436D000444855 /* Arco Basses.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Arco Basses.sf2"; sourceTree = "<group>"; };
-		F9A54A8D183436D000444855 /* Bass Street (9kb).sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Bass Street (9kb).sf2"; sourceTree = "<group>"; };
-		F9A54A8E183436D000444855 /* Dark Basses.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dark Basses.sf2"; sourceTree = "<group>"; };
 		F9AD30851828494C0029A51C /* SoundKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SoundKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9AD30881828494C0029A51C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		F9AD308A1828494C0029A51C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -147,8 +147,6 @@
 		F9AD30CB182875770029A51C /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		F9AD30CF182875850029A51C /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		F9AD30D1182875FD0029A51C /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
-		F9C2FCD81829C7FC0056D6E2 /* AudioTest.xh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AudioTest.xh; sourceTree = "<group>"; };
-		F9C2FCD91829C7FC0056D6E2 /* AudioTest.xm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AudioTest.xm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -207,47 +205,28 @@
 		F9A54A7218340D0800444855 /* SF2 */ = {
 			isa = PBXGroup;
 			children = (
-				F94CF563183AC46D001D9C37 /* ProTrax_Classical_Guitar.sf2 */,
-				F94CF545183AC453001D9C37 /* Recorder_Soprano.sf2 */,
-				F94CF546183AC453001D9C37 /* ElPiano1.sf2 */,
-				F94CF547183AC453001D9C37 /* Pianino.sf2 */,
-				F94CF548183AC453001D9C37 /* Warm_Lead_MDX7.sf2 */,
-				F94CF549183AC453001D9C37 /* Fretless_Bass_Stereo.sf2 */,
-				F94CF54A183AC453001D9C37 /* K_Strings.sf2 */,
-				F94CF54B183AC453001D9C37 /* English_Horn.sf2 */,
-				F94CF54C183AC453001D9C37 /* Synth_Bass.sf2 */,
-				F94CF54D183AC453001D9C37 /* Chemical_Clarinet_MDX7.sf2 */,
-				F94CF54E183AC453001D9C37 /* Clean_Guitar.sf2 */,
-				F94CF54F183AC453001D9C37 /* Jazz_Guitar.sf2 */,
-				F94CF550183AC453001D9C37 /* Zero_Lead_MDX7.sf2 */,
-				F94CF551183AC453001D9C37 /* Zed_Bass_2PM.sf2 */,
-				F94CF552183AC453001D9C37 /* Crazy_Crystal_MDX7.sf2 */,
-				F94CF553183AC453001D9C37 /* Roll_Pad_MDX7.sf2 */,
-				F94CF543183AC393001D9C37 /* Synth512.sf2 */,
-				F94CF541183ABF35001D9C37 /* ChoriumRevA.sf2 */,
-				F9A54A86183436D000444855 /* 2rock9.sf2 */,
-				F9A54A87183436D000444855 /* 1115-BassPONK.sf2 */,
-				F9A54A89183436D000444855 /* 1115-Fingered bass One.sf2 */,
-				F9A54A8B183436D000444855 /* ACOUSTC-BASS.sf2 */,
-				F9A54A8C183436D000444855 /* Arco Basses.sf2 */,
-				F9A54A8D183436D000444855 /* Bass Street (9kb).sf2 */,
-				F9A54A8E183436D000444855 /* Dark Basses.sf2 */,
-				F9A54A731834110D00444855 /* synth.sf2 */,
-				F9A54A741834110D00444855 /* mood.sf2 */,
-				F9A54A751834110D00444855 /* male.sf2 */,
-				F9A54A761834110D00444855 /* vibra.sf2 */,
-				F9A54A771834110D00444855 /* string.sf2 */,
-				F9A54A781834110D00444855 /* organ.sf2 */,
-				F918F533182AAE0500A2BFA4 /* HS Synthetic Electronic.sf2 */,
-				F918F531182AADFC00A2BFA4 /* Vintage Dreams Waves v2.sf2 */,
-				F918F52F182AAD1600A2BFA4 /* tr808.sf2 */,
-				F918F52D182AAD0300A2BFA4 /* hs-pad-texts.sf2 */,
-				F918F524182A9B9300A2BFA4 /* Gorts_Filters.sf2 */,
-				F9A54A6418340B3A00444855 /* JK_Pads.sf2 */,
-				F9A54A6518340B3A00444855 /* Johansson_BeautifulPad.sf2 */,
-				F9A54A6718340B3A00444855 /* jonnypad6.sf2 */,
-				F9A54A6818340B3A00444855 /* jonnypad8.sf2 */,
-				F9A54A6918340B3A00444855 /* rtanpad1.sf2 */,
+				F94CF593183C0BC7001D9C37 /* pad 2ndOrder.sf2 */,
+				F94CF594183C0BC7001D9C37 /* pad Air Gtrs.sf2 */,
+				F94CF595183C0BC7001D9C37 /* pad Alaska.sf2 */,
+				F94CF596183C0BC7001D9C37 /* pad Aylius.sf2 */,
+				F94CF597183C0BC7001D9C37 /* pad BelChoir.sf2 */,
+				F94CF598183C0BC7001D9C37 /* pad Contnent.sf2 */,
+				F94CF599183C0BC7001D9C37 /* pad DarkSaws.sf2 */,
+				F94CF59A183C0BC7001D9C37 /* pad Dragon.sf2 */,
+				F94CF59B183C0BC7001D9C37 /* pad Escape.sf2 */,
+				F94CF59C183C0BC7001D9C37 /* pad FiltWhll.sf2 */,
+				F94CF59D183C0BC7001D9C37 /* pad FltrStik.sf2 */,
+				F94CF59E183C0BC7001D9C37 /* pad GabesGtr.sf2 */,
+				F94CF59F183C0BC7001D9C37 /* pad Matrix.sf2 */,
+				F94CF5A0183C0BC7001D9C37 /* pad Med Moog.sf2 */,
+				F94CF5A1183C0BC7001D9C37 /* pad Mute Vox.sf2 */,
+				F94CF5A2183C0BC7001D9C37 /* pad OBXwin.sf2 */,
+				F94CF5A3183C0BC7001D9C37 /* pad P5 Piper.sf2 */,
+				F94CF5A4183C0BC7001D9C37 /* pad P5 Pulse.sf2 */,
+				F94CF5A5183C0BC7001D9C37 /* pad P5Filter.sf2 */,
+				F94CF5A6183C0BC7001D9C37 /* pad PolyMoog.sf2 */,
+				F94CF5A7183C0BC7001D9C37 /* pad Sky Saw.sf2 */,
+				F94CF5A8183C0BC7001D9C37 /* pad Ye-ei-ei.sf2 */,
 			);
 			name = SF2;
 			sourceTree = "<group>";
@@ -297,8 +276,6 @@
 				F94CF532183AA379001D9C37 /* SoundKit.entitlements */,
 				F94CF5281836766B001D9C37 /* Scales */,
 				F9C2FCDB182A8FA00056D6E2 /* Audio */,
-				F9C2FCD81829C7FC0056D6E2 /* AudioTest.xh */,
-				F9C2FCD91829C7FC0056D6E2 /* AudioTest.xm */,
 				F9AD30991828494C0029A51C /* SKAppDelegate.h */,
 				F9AD309A1828494C0029A51C /* SKAppDelegate.m */,
 				F9AD309C1828494C0029A51C /* Main.storyboard */,
@@ -448,9 +425,29 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F94CF564183AC497001D9C37 /* ProTrax_Classical_Guitar.sf2 in Resources */,
-				F94CF554183AC453001D9C37 /* Recorder_Soprano.sf2 in Resources */,
+				F94CF5AB183C0BC7001D9C37 /* pad Alaska.sf2 in Resources */,
+				F94CF5B7183C0BC7001D9C37 /* pad Mute Vox.sf2 in Resources */,
+				F94CF5B0183C0BC7001D9C37 /* pad Dragon.sf2 in Resources */,
+				F94CF5BB183C0BC7001D9C37 /* pad P5Filter.sf2 in Resources */,
+				F94CF5BE183C0BC7001D9C37 /* pad Ye-ei-ei.sf2 in Resources */,
+				F94CF5AA183C0BC7001D9C37 /* pad Air Gtrs.sf2 in Resources */,
+				F94CF5B5183C0BC7001D9C37 /* pad Matrix.sf2 in Resources */,
+				F94CF5AF183C0BC7001D9C37 /* pad DarkSaws.sf2 in Resources */,
+				F94CF5BA183C0BC7001D9C37 /* pad P5 Pulse.sf2 in Resources */,
+				F94CF5B4183C0BC7001D9C37 /* pad GabesGtr.sf2 in Resources */,
+				F94CF5BD183C0BC7001D9C37 /* pad Sky Saw.sf2 in Resources */,
+				F94CF5B3183C0BC7001D9C37 /* pad FltrStik.sf2 in Resources */,
+				F94CF5B8183C0BC7001D9C37 /* pad OBXwin.sf2 in Resources */,
+				F94CF5BC183C0BC7001D9C37 /* pad PolyMoog.sf2 in Resources */,
+				F94CF5A9183C0BC7001D9C37 /* pad 2ndOrder.sf2 in Resources */,
+				F94CF5B2183C0BC7001D9C37 /* pad FiltWhll.sf2 in Resources */,
+				F94CF5AC183C0BC7001D9C37 /* pad Aylius.sf2 in Resources */,
+				F94CF5B6183C0BC7001D9C37 /* pad Med Moog.sf2 in Resources */,
+				F94CF5B1183C0BC7001D9C37 /* pad Escape.sf2 in Resources */,
+				F94CF5AD183C0BC7001D9C37 /* pad BelChoir.sf2 in Resources */,
+				F94CF5B9183C0BC7001D9C37 /* pad P5 Piper.sf2 in Resources */,
 				F94CF53D183AA5D5001D9C37 /* README.md in Resources */,
+				F94CF5AE183C0BC7001D9C37 /* pad Contnent.sf2 in Resources */,
 				F94CF52B1836769F001D9C37 /* major.json in Resources */,
 				F93F987C1829AB7D0017D91F /* Main.storyboard in Resources */,
 				F9AD30951828494C0029A51C /* InfoPlist.strings in Resources */,
@@ -484,7 +481,6 @@
 				F9A54A601833EA1100444855 /* SKAudio.m in Sources */,
 				F9A54A631834008100444855 /* SKAudioError.m in Sources */,
 				F9AD30971828494C0029A51C /* main.m in Sources */,
-				F9C2FCDA1829C7FC0056D6E2 /* AudioTest.xm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -38,9 +38,9 @@
     
     buses = [[NSMutableArray alloc] init];
     
-    [self addSF2Bus:@"ProTrax_Classical_Guitar" :0 :.7];
-    [self addSF2Bus:@"ProTrax_Classical_Guitar" :1 :.5];
-    [self addSF2Bus:@"ProTrax_Classical_Guitar" :2 :.3];
+    [self addSF2Bus:@"pad FiltWhll" :0 :.5];
+    [self addSF2Bus:@"pad Dragon" :1 :.4];
+    [self addSF2Bus:@"pad Med Moog" :2 :.1];
 
 
 
@@ -217,7 +217,6 @@
 
     [SKAudioError check:result :"AudioUnitSetParameter (enable the mixer unit"];
     
-
 }
 
 

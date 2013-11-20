@@ -22,12 +22,22 @@ SKField * scene;
 //    skView.showsFPS = YES;
 //    skView.showsNodeCount = YES;
     
-    // Create and initialize a tap gesture
-    UIPinchGestureRecognizer *pinch = [[UIPinchGestureRecognizer alloc]
-                                             initWithTarget:self action:@selector(showGestureForPinchRecognizer:)];
-    
-    // Add the tap gesture recognizer to the view
+    //  gestures
+    UIPinchGestureRecognizer *pinch = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(handlePinchGesture:)];
     [self.view addGestureRecognizer:pinch];
+    
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapGesture:)];
+    tapGesture.numberOfTapsRequired = 2;
+    [self.view addGestureRecognizer:tapGesture];
+    
+
+//    UITapGestureRecognizer
+//    UIPinchGestureRecognizer
+//    UIRotationGestureRecognizer
+//    UISwipeGestureRecognizer
+//    UIPanGestureRecognizer
+//    UIScreenEdgePanGestureRecognizer
+//    UILongPressGestureRecognizer
     
     // Create and configure the scene.
     scene = [SKField sceneWithSize:skView.bounds.size];
@@ -58,10 +68,42 @@ SKField * scene;
 }
 
 
-- (IBAction)showGestureForPinchRecognizer:(UIPinchGestureRecognizer *)recognizer {
+- (IBAction)handlePinchGesture:(UIPinchGestureRecognizer *)recognizer
+{
     // tell the scene about the pinch scale
     [scene setTimeScale:[recognizer scale]];
 }
 
+
+- (void)handleTapGesture:(UITapGestureRecognizer *)recognizer {
+    if (recognizer.state == UIGestureRecognizerStateRecognized)
+    {
+        [scene addThing:[recognizer locationInView:self.view]];
+    }
+}
+
+
+
+-(BOOL)canBecomeFirstResponder {
+    return YES;
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self becomeFirstResponder];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [self resignFirstResponder];
+    [super viewWillDisappear:animated];
+}
+
+- (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event
+{
+    if (motion == UIEventSubtypeMotionShake)
+    {
+        [scene reset];
+    }
+}
 
 @end

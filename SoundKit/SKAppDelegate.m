@@ -13,7 +13,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [TestFlight takeOff:@"42e3ba07-4737-4745-b175-5917014dd5cb"];
+    [TestFlight takeOff:@"cab0451a-3c1d-47d0-97ff-b62ff4e3e3e4"];
+    application.applicationSupportsShakeToEdit = YES;
     return YES;
 }
 							
