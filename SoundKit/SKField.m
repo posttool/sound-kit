@@ -65,7 +65,7 @@ SKShapeNode *touch;
         touch = [SKShapeNode node];
         touch.lineWidth = .1;
         touch.strokeColor = [[SKColor alloc] initWithRed:1 green:1 blue:1 alpha:.3];
-        [self addChild:touch];
+        [world addChild:touch];
         
         
         
@@ -90,7 +90,7 @@ SKShapeNode *touch;
                                         andColor:c
                                           andBus:[sound busAt:p*3]];
     sk.position = location;
-    [self addChild:sk];
+    [world addChild:sk];
 }
 
 -(void)reset
@@ -106,17 +106,6 @@ SKShapeNode *touch;
     }
 }
 
-- (void)didSimulatePhysics
-{
-    [self centerOnNode: [self childNodeWithName: @"//camera"]];
-   // NSLog(@"HERE");
-}
-
-- (void) centerOnNode: (SKNode *) node
-{
-    CGPoint cameraPositionInScene = [node.scene convertPoint:node.position fromNode:node.parent];
-    node.parent.position = CGPointMake(node.parent.position.x - cameraPositionInScene.x, node.parent.position.y - cameraPositionInScene.y);
-}
 
 
 // stufu
