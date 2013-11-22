@@ -37,6 +37,7 @@
 		F94CF5BC183C0BC7001D9C37 /* pad PolyMoog.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = F94CF5A6183C0BC7001D9C37 /* pad PolyMoog.sf2 */; };
 		F94CF5BD183C0BC7001D9C37 /* pad Sky Saw.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = F94CF5A7183C0BC7001D9C37 /* pad Sky Saw.sf2 */; };
 		F94CF5BE183C0BC7001D9C37 /* pad Ye-ei-ei.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = F94CF5A8183C0BC7001D9C37 /* pad Ye-ei-ei.sf2 */; };
+		F94CF5C1183ED328001D9C37 /* SKThat.m in Sources */ = {isa = PBXBuildFile; fileRef = F94CF5C0183ED328001D9C37 /* SKThat.m */; };
 		F999C1C0182C6B8900B428A4 /* SKThing.m in Sources */ = {isa = PBXBuildFile; fileRef = F999C1BF182C6B8900B428A4 /* SKThing.m */; };
 		F999C1C31833E59100B428A4 /* SKBus.m in Sources */ = {isa = PBXBuildFile; fileRef = F999C1C21833E59100B428A4 /* SKBus.m */; };
 		F9A54A601833EA1100444855 /* SKAudio.m in Sources */ = {isa = PBXBuildFile; fileRef = F9A54A5F1833EA1100444855 /* SKAudio.m */; };
@@ -111,6 +112,8 @@
 		F94CF5A6183C0BC7001D9C37 /* pad PolyMoog.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "pad PolyMoog.sf2"; sourceTree = "<group>"; };
 		F94CF5A7183C0BC7001D9C37 /* pad Sky Saw.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "pad Sky Saw.sf2"; sourceTree = "<group>"; };
 		F94CF5A8183C0BC7001D9C37 /* pad Ye-ei-ei.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "pad Ye-ei-ei.sf2"; sourceTree = "<group>"; };
+		F94CF5BF183ED328001D9C37 /* SKThat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKThat.h; sourceTree = "<group>"; };
+		F94CF5C0183ED328001D9C37 /* SKThat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKThat.m; sourceTree = "<group>"; };
 		F999C1BE182C6B8900B428A4 /* SKThing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKThing.h; sourceTree = "<group>"; };
 		F999C1BF182C6B8900B428A4 /* SKThing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKThing.m; sourceTree = "<group>"; };
 		F999C1C11833E59100B428A4 /* SKBus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKBus.h; sourceTree = "<group>"; };
@@ -285,6 +288,8 @@
 				F9AD30A31828494C0029A51C /* SKField.m */,
 				F9AD30A71828494C0029A51C /* Images.xcassets */,
 				F9AD30911828494C0029A51C /* Supporting Files */,
+				F94CF5BF183ED328001D9C37 /* SKThat.h */,
+				F94CF5C0183ED328001D9C37 /* SKThat.m */,
 				F999C1BE182C6B8900B428A4 /* SKThing.h */,
 				F999C1BF182C6B8900B428A4 /* SKThing.m */,
 				F94CF52C18367C5C001D9C37 /* SKScale.h */,
@@ -480,6 +485,7 @@
 				F9AD30A11828494C0029A51C /* SKViewController.m in Sources */,
 				F9A54A601833EA1100444855 /* SKAudio.m in Sources */,
 				F9A54A631834008100444855 /* SKAudioError.m in Sources */,
+				F94CF5C1183ED328001D9C37 /* SKThat.m in Sources */,
 				F9AD30971828494C0029A51C /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

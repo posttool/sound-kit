@@ -15,7 +15,6 @@
 
 -(void)setTimeScale:(float)scale;
 -(void)addThing:(CGPoint)location;
--(void)boundary:(CGPoint)where :(BOOL)lr;
 -(void)reset;
 
 @end

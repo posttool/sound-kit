@@ -16,7 +16,7 @@
 @synthesize playing = _playing;
 @synthesize bus = _bus;
 
-- (id) initWithPitch:(int)pitch andSize:(int)size andColor:(SKColor*)color andBus:(SKBus*)bus
+- (id) initWithPitch:(int)pitch andSize:(CGSize)size andColor:(SKColor*)color andBus:(SKBus*)bus
 {
     self = [super init];
     
@@ -28,20 +28,18 @@
         _playing = false;
         _bus = bus;
         
-        CGSize size = CGSizeMake(self.size*.5, self.size);
         CGRect rect = CGRectMake(0, 0, size.width, size.height);
         
         CGMutablePathRef path = CGPathCreateMutable();
-//        CGPathAddArc(path, NULL, 0,0, self.size, 0, M_PI*2, YES);
         CGAffineTransform t = CGAffineTransformMakeTranslation(-size.width/2, -size.height/2);
         CGPathAddRect(path, &t, rect);
         self.path = path;
+        
         [self color1];
         self.lineWidth = .1;
         self.strokeColor = _color;
         self.glowWidth = 0;
         
-//        self.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:self.size];
         self.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:size];
         self.physicsBody.dynamic = YES;
         self.physicsBody.categoryBitMask = 1;
@@ -50,7 +48,6 @@
         self.physicsBody.friction = 0;
         self.physicsBody.restitution = .96;
         self.physicsBody.linearDamping = 0;
-
     }
     
     return self;
@@ -65,19 +62,17 @@
 {
     self.fillColor = [SKColor colorWithRed:.93 green:.96 blue:.90 alpha:.9];
 }
+
 -(void)contact//:(NSArray*)pattern
 {
 //    if (self.playing)
 //        return;
-//    if (arc4random()%10==1)
-//        self.pitch += (arc4random()%10)-5;
 //    NSLog(@"pitch=%d", self.pitch);
 
     NSMutableArray * sa = [[NSMutableArray alloc] init];
     int s = arc4random() % 3 + 3;
     for (int i=0; i<s; i++)
     {
-        //float p = 3 *i/(float)s+1;//arc4random() % 3 ;
         float d = arc4random()%2 == 0 ? 0.5 : 1.0; //pattern[i].duration
         [sa addObject:[SKAction runBlock:^(void){ [_bus noteOn:self.pitch :(i == 0) ? 127: 66]; }]];
         [sa addObject:[self one:.1 :(i == 0) ? 20: 6]];
@@ -88,6 +83,7 @@
 
 //    if (_playing)
 //        [_bus noteOff:self.pitch ];
+    
     _playing = YES;
     [self removeAllActions];
     [self runAction:[SKAction sequence:sa]];
@@ -116,5 +112,6 @@
     [self removeAllActions];
     [_bus noteOff:self.pitch];
     [self removeFromParent];
+    [self release];
 }
 @end

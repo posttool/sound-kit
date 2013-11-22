@@ -11,63 +11,75 @@
 #import "SKScale.h"
 #import "SKThing.h"
 #import "SKThingProp.h"
+#import "SKThat.h"
 
 @implementation SKField
 
-CGPoint anchorPoint;
 SKNode *world;
-SKNode *camera;
-NSMutableArray *colors;
 SKAudio *sound;
 NSMutableArray *joints;
 SKScale *scale;
-
+SKNode *grid;
+SKNode *thats;
+SKNode *things;
 SKShapeNode *touch;
 
 -(id)initWithSize:(CGSize)size
 {
     if (self = [super initWithSize:size]) {
         
-        self.physicsBody = [SKPhysicsBody bodyWithEdgeLoopFromRect:self.frame];
-        
-        sound = [[SKAudio alloc] init];
-        
-        joints = [[NSMutableArray alloc] init];
-        
-        scale = [[SKScale alloc] initWithJSONFile:@"major"];
-        
+        CGRect f = self.frame;
+        self.physicsBody = [SKPhysicsBody bodyWithEdgeLoopFromRect:f];
         
         self.physicsWorld.speed = 1.1;
         self.physicsWorld.gravity = CGVectorMake(0, 0);
         self.physicsWorld.contactDelegate = self;
         
+        CMMotionManager * motionManager = [[CMMotionManager alloc] init];
+        motionManager.accelerometerUpdateInterval = .1;
+        [motionManager startAccelerometerUpdatesToQueue:[NSOperationQueue currentQueue]
+                                            withHandler:^(CMAccelerometerData  *data, NSError *error) {
+                                                self.physicsWorld.gravity = CGVectorMake(data.acceleration.x, data.acceleration.y);
+                                                if(error)
+                                                {
+                                                    NSLog(@"%@", error);
+                                                }
+                                            }];
+        
+        scale = [[SKScale alloc] initWithJSONFile:@"major"];
+
+        sound = [[SKAudio alloc] init];
+        
+        joints = [[NSMutableArray alloc] init];
+        
+        
+        
         
         //
-        anchorPoint = CGPointMake (0.5,0.5);
         world = [SKNode node];
         [self addChild:world];
-        camera = [SKNode node];
-        camera.name = @"camera";
-        [world addChild:camera];
         
+        grid = [[SKNode alloc] init];
+        float a = self.frame.size.height/pathsteps;
+        for (int i=0; i<pathsteps; i++)
+        {
+            SKShapeNode *l = [[SKShapeNode alloc]init];
+            l.path = [self line:0 :i*a :self.frame.size.width :i*a];
+            l.strokeColor = [SKColor colorWithRed:0 green:.8 blue:1 alpha:.03];
+            [grid addChild:l];
+        }
+        [world addChild:grid];
         
-        CMMotionManager * motionManager = [[CMMotionManager alloc] init];
-        motionManager.accelerometerUpdateInterval = .2;
-        [motionManager startAccelerometerUpdatesToQueue:[NSOperationQueue currentQueue]
-                                                 withHandler:^(CMAccelerometerData  *data, NSError *error) {
-                                                     self.physicsWorld.gravity = CGVectorMake(data.acceleration.x, data.acceleration.y);
-                                                     if(error)
-                                                     {
-                                                         NSLog(@"%@", error);
-                                                     }
-                                                 }];
+        thats = [[SKNode alloc] init];
+        [world addChild:thats];
+        
+        things = [[SKNode alloc] init];
+        [world addChild:things];
         
         touch = [SKShapeNode node];
         touch.lineWidth = .1;
         touch.strokeColor = [[SKColor alloc] initWithRed:1 green:1 blue:1 alpha:.3];
         [world addChild:touch];
-        
-        
         
     }
     return self;
@@ -83,14 +95,15 @@ SKShapeNode *touch;
 {
     location.y = self.size.height - location.y;
     float p = location.y / self.size.height;
+    float ip = 1 - p;
     int pitch = [scale pitchAt:p * 22 + 22];
     SKColor *c= [SKColor colorWithRed:1 green:1 blue:1 alpha:p+.1];
     SKThing *sk = [[SKThing alloc] initWithPitch:pitch
-                                         andSize:(1-p)*64+16
+                                         andSize:CGSizeMake(ip*64+16, ip*64+16)
                                         andColor:c
                                           andBus:[sound busAt:p*3]];
     sk.position = location;
-    [world addChild:sk];
+    [things addChild:sk];
 }
 
 -(void)reset
@@ -164,55 +177,99 @@ NSMutableArray *touchedNodes;
             [touchLocations addObject:[[NSMutableArray alloc]initWithObjects:[NSValue valueWithCGPoint:location], nil]];
             touchedNode.physicsBody.velocity = CGVectorMake(0,0);
         }
+        else
+        {
+            [touchLocations addObject:[[NSMutableArray alloc]initWithObjects:[NSValue valueWithCGPoint:location], nil]];
+        }
     }
 }
 
-float pathsteps = 50.0;
+float pathsteps = 24;
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    for (int i=0; i < touchedNodes.count; i++)
+    for (int i=0; i < touchLocations.count; i++)
     {
-        SKThing * thing = [touchedNodes objectAtIndex:i];
         UITouch * uitouch = [[touches objectEnumerator] nextObject];
         CGPoint location = [uitouch locationInNode:self];
-        thing.position = location;
         NSMutableArray * locs = [touchLocations objectAtIndex:i];
         [locs addObject:[NSValue valueWithCGPoint:location]];
+        if (touchedNodes.count>i)
+        {
+            SKThing * thing = [touchedNodes objectAtIndex:i];
+            thing.position = location;
+        }
     }
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-//    for (int i=0; i < touchedNodes.count; i++)
-//    {
-//        SKThing * thing = [touchedNodes objectAtIndex:i];
-//        UITouch * touch = [[touches objectEnumerator] nextObject];
-//        CGPoint location = [touch locationInNode:self];
-//        thing.position = location;
-//        NSMutableArray * locs = [touchLocations objectAtIndex:i];
-//        CGPoint lastLoc = [[locs lastObject] CGPointValue];
-//        CGVector vec = CGVectorMake((location.x - lastLoc.x) * 17, (location.y - lastLoc.y) * 17);
-//        [thing.physicsBody applyForce:vec];
-//    }
-    for (int i=0; i < touchedNodes.count; i++)
+    for (int i=0; i < touchLocations.count; i++)
     {
         NSArray *p = [touchLocations objectAtIndex:i];
-        SKThing * thing = [touchedNodes objectAtIndex:i];
-        if (p.count > pathsteps)
-        {
-            [thing destroy];
-            continue;
-        }
         CGPoint ps0 = [self posAt:i :0];
         CGPoint ps1 = [self posAt:i :-1];
-        CGVector vec = CGVectorMake((ps1.x - ps0.x) * 17, (ps1.y - ps0.y) * 17);
-        [thing.physicsBody applyForce:vec];
+        if (touchedNodes.count > i)
+        {
+            SKThing * thing = [touchedNodes objectAtIndex:i];
+            if (p.count > pathsteps)
+            {
+                [thing destroy];
+                continue;
+            }
+            CGVector vec = CGVectorMake((ps1.x - ps0.x) * 17, (ps1.y - ps0.y) * 17);
+            [thing.physicsBody applyForce:vec];
+            thing.alpha = 1;
+        }
+        else
+        {
+//            CGRectStandardize(<#CGRect rect#>)
+            CGSize size = CGSizeMake(ps0.x - ps1.x, ps0.y - ps1.y);
+            if (size.width + size.height != 0)
+            {
+                SKThat *sk = [[SKThat alloc] initWithSize:size];
+                sk.position = ps1;
+                [thats addChild:sk];
+            }
+        }
     }
 
     [touchedNodes removeAllObjects];
     [touchLocations removeAllObjects];
     touch.path = nil;
     [self setTimeScale:1];
+}
+
+// the update callback!
+-(void)update:(CFTimeInterval)currentTime
+{
+    if (touchLocations.count != 0)
+    {
+        //NSLog(@"touches=%@",touchLocations);
+        NSMutableArray * locs = [touchLocations objectAtIndex:0];
+        float a = MAX(0, 1-locs.count/pathsteps);
+        touch.strokeColor = [[SKColor alloc] initWithRed:1 green:1 blue:1 alpha:a];
+        if (touchedNodes.count != 0)
+        {
+            touch.path = [self line:[self posAt:0 :0] :[self posAt:0 :-1]];
+            SKThing *thing = [touchedNodes objectAtIndex:0];
+            thing.alpha = a;
+        }
+        else
+        {
+            CGPoint a = [self posAt:0 :0];
+            CGPoint b = [self posAt:0 :-1];
+            
+            CGMutablePathRef path = [self line:a :b];
+            CGPathAddLineToPoint(path, NULL, b.x, a.y);
+            CGPathAddLineToPoint(path, NULL, a.x, a.y);
+            CGPathAddLineToPoint(path, NULL, a.x, b.y);
+            CGPathAddLineToPoint(path, NULL, b.x, b.y);
+            
+            touch.path = path;
+            
+        }
+        
+    }
 }
 
 -(CGPoint)posAt:(int)tidx :(int)hidx
@@ -224,21 +281,18 @@ float pathsteps = 50.0;
 }
 
 
--(void)update:(CFTimeInterval)currentTime
+
+-(CGMutablePathRef)line:(float)x0 :(float)y0 :(float)x1 :(float)y1
 {
-    if (touchLocations.count != 0)
-    {
-        NSLog(@"touches=%@",touchLocations);
-        CGMutablePathRef path = CGPathCreateMutable();
-        CGPoint ps = [self posAt:0 :0];
-        CGPathMoveToPoint(path, NULL, ps.x, ps.y);
-        ps = [self posAt:0 :-1];
-        CGPathAddLineToPoint(path, NULL, ps.x, ps.y);
-        touch.path = path;
-        NSMutableArray * locs = [touchLocations objectAtIndex:0];
-        float a = MAX(0, 1-locs.count/pathsteps);
-        touch.strokeColor = [[SKColor alloc] initWithRed:1 green:1 blue:1 alpha:a];
-    }
+    return [self line:CGPointMake(x0,y0) :CGPointMake(x1,y1)];
+}
+
+-(CGMutablePathRef)line:(CGPoint)a :(CGPoint)b
+{
+    CGMutablePathRef path = CGPathCreateMutable();
+    CGPathMoveToPoint(path, NULL, a.x, a.y);
+    CGPathAddLineToPoint(path, NULL, b.x, b.y);
+    return path;
 }
 
 @end

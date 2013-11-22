@@ -13,11 +13,11 @@
 @interface SKThing : SKShapeNode
 @property (readonly) SKColor * color;
 @property (readonly) int pitch;
-@property (readonly) int size;
+@property (readonly) CGSize size;
 @property (readonly) bool playing;
 @property (readonly) SKBus * bus;
 
-- (id) initWithPitch:(int)pitch andSize:(int)size andColor:(SKColor*)color andBus:(SKBus*)bus;
+- (id) initWithPitch:(int)pitch andSize:(CGSize)size andColor:(SKColor*)color andBus:(SKBus*)bus;
 - (void) contact;
 - (void) destroy;
 
